@@ -3,7 +3,8 @@
   "name": "Korean Dictionary Popup",
   "version": "1.0",
   "description": "Displays the meaning of a selected word using the 우리말샘 API.",
-  "permissions": ["activeTab", "storage", "contextMenus", "http://*/", "https://*/"],
+  "permissions": ["activeTab", "storage", "contextMenus"],
+  "host_permissions": ["http://*/*", "https://*/*"],  // 권한 설정
   "background": {
     "service_worker": "background.js"
   },
