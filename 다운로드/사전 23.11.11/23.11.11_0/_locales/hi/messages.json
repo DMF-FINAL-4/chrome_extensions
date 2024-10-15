@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "पूर्ण-विशेषताओं वाले शब्दकोश विस्तार"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "शब्दकोष"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "शब्दकोष"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "परिभाषित करना"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "समानार्थी शब्द"
+   }
+}

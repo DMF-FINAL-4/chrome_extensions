@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Fullständig ordboksförlängning"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Lexikon"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Lexikon"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "definiera"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "synonymer"
+   }
+}

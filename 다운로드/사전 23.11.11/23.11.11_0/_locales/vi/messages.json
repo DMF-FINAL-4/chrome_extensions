@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Phần mở rộng từ điển đầy đủ tính năng"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Từ điển"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Từ điển"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "định nghĩa"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "Từ đồng nghĩa"
+   }
+}

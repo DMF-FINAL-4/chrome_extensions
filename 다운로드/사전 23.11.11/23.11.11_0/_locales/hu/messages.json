@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Teljes funkciós szótárhosszabbítás"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Szótár"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Szótár"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "meghatároz"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "szinonimák"
+   }
+}

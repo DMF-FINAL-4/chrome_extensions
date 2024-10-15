@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "முழு அம்சமான அகராதி நீட்டிப்பு"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "அகராதி"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "அகராதி"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "வரையறு"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "ஒத்த"
+   }
+}

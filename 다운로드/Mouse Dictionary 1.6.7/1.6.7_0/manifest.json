@@ -1,0 +1,42 @@
+{
+   "action": {
+      "default_icon": "icons/icon19.png",
+      "default_title": "Mouse Dictionary"
+   },
+   "author": "wtetsu",
+   "background": {
+      "service_worker": "background.js"
+   },
+   "commands": {
+      "_execute_action": {
+         "description": "Activate the extension"
+      },
+      "scroll_down": {
+         "description": "__MSG_scrollDown__"
+      },
+      "scroll_up": {
+         "description": "__MSG_scrollUp__"
+      }
+   },
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "icons": {
+      "128": "icons/icon128.png",
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzKUMNP9ytoB56V6VKhToh77pS3pWE6xOVxUaWQdIXPwG5iJTOlxqHUT36q5+qgdL8DD2+dv1x9XKctpbohBb6+S8RMlxNn/BBPoUYch0T6gh0k6uC1KTLqjEbY9ZFthjrgkE/fHyZoxTBFM846F1+Gswn9R7sKppuMopKw1iIT+5pTDcrrqXmsVWBoViNhkA9u2qBWrpVHqgqfjbfjWvMZQ4M7vIT+qyPrIpCG5iyjlD9EJrleBP5KkfJp3symruHIR0VItUhYFQeQYcSW41RKGup24o4i6065mU6fdBJ8uj/vbaEYHXEtLuF+Ko2odoHf7/M6El8d70ifhJJnScEwIDAQAB",
+   "manifest_version": 3,
+   "name": "Mouse Dictionary",
+   "options_ui": {
+      "open_in_tab": true,
+      "page": "options/options.html"
+   },
+   "permissions": [ "storage", "unlimitedStorage", "activeTab", "scripting" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.6.7",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "data/rule.json", "data/dict*.json" ]
+   } ]
+}

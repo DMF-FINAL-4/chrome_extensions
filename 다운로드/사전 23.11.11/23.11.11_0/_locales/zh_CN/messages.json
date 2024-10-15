@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "全功能词典扩展"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "字典"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "字典"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "定义"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "同义词"
+   }
+}

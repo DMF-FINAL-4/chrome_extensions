@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "പൂർണ്ണ-തിരഞ്ഞെടുത്ത നിഘണ്ടു വിപുലീകരണം"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "നിഘണ്ടു"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "നിഘണ്ടു"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "നിര്വചിക്കുക"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "പര്യായങ്ങൾ"
+   }
+}

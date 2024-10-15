@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "پسوند فرهنگ لغت کامل"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "فرهنگ لغت"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "فرهنگ لغت"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "تعريف كردن"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "مترادف"
+   }
+}

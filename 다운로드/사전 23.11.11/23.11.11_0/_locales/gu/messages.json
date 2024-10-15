@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "પૂર્ણ-સુવિધાયુક્ત શબ્દકોશ"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "શબ્દકોશ"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "શબ્દકોશ"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "વ્યાખ્યા કરવી"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "મહાવરો"
+   }
+}

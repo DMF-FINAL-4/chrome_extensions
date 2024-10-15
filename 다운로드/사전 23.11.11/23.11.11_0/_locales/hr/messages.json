@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Potpuno proširenje rječnika"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Rječnik"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Rječnik"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "definirati"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "sinonimi"
+   }
+}

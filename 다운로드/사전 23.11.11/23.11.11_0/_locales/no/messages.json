@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Full-funksjonsordbokforlengelse"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Ordbok"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Ordbok"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "definere"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "synonymer"
+   }
+}

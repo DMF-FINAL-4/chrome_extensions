@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Lanjutan kamus penuh"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Kamus"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Kamus"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "Tentukan"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "sinonim"
+   }
+}

@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "পূর্ণ বৈশিষ্ট্যযুক্ত অভিধান এক্সটেনশন"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "অভিধান"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "অভিধান"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "সংজ্ঞায়িত"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "প্রতিশব্দ"
+   }
+}

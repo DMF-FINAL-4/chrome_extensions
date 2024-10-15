@@ -1,0 +1,49 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "images/icon128.png",
+         "16": "images/icon16.png",
+         "48": "images/icon48.png"
+      },
+      "default_popup": "popup.html",
+      "default_title": "영어사전에서 검색"
+   },
+   "background": {
+      "service_worker": "background.bundle.js"
+   },
+   "commands": {
+      "_execute_action": {
+         "description": "영어사전에서 검색",
+         "suggested_key": {
+            "default": "Ctrl+Shift+E"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "content.bundle.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_idle"
+   } ],
+   "declarative_net_request": {
+      "rule_resources": [ {
+         "enabled": true,
+         "id": "netRequestRules",
+         "path": "netRequestRules.json"
+      } ]
+   },
+   "description": "영어 단어의 뜻과 예문을 쉽게 찾을 수 있습니다.",
+   "host_permissions": [ "https://en.dict.naver.com/" ],
+   "icons": {
+      "128": "images/icon128.png",
+      "16": "images/icon16.png",
+      "48": "images/icon48.png"
+   },
+   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDpBFQ0lM8hNz2pmkam8FjjS78ixcjtddwSBt4b2M1hORXC0LJ64up+yf4Kr6FKxmCkC7sZMsNzXw+mq+TIdN6Vz8giHO+4aoGy5+JtHvo79ZLo0BsdIUX551RmoYWlcgXj8x6TyFQFsHixKzkkFkg+8t3yAC2Mc8ljiQg6rG+SjwIDAQAB",
+   "manifest_version": 3,
+   "name": "네이버 영어사전 (Naver English Dictionary)",
+   "options_page": "options.html",
+   "permissions": [ "tts", "storage", "declarativeNetRequest" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "4.4.0"
+}

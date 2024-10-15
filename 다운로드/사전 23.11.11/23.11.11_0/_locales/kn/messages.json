@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "ಪೂರ್ಣ-ವೈಶಿಷ್ಟ್ಯದ ನಿಘಂಟು ವಿಸ್ತರಣೆ"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "ನಿಘಂಟು"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "ನಿಘಂಟು"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "ವಿವರಿಸು"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "ಸಮಾನಾರ್ಥಕಾರ್ಥ"
+   }
+}

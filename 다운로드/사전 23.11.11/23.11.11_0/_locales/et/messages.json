@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Täisfunktsionaalne sõnaraamatu pikendus"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Sõnaraamat"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Sõnaraamat"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "defineerima"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "sünonüümid"
+   }
+}

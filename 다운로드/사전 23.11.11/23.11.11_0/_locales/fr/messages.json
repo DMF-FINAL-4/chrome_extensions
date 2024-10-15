@@ -1,0 +1,22 @@
+{
+   "appDesc": {
+      "description": "The description of your extension",
+      "message": "Extension du dictionnaire complet"
+   },
+   "appName": {
+      "description": "The name of the extension",
+      "message": "Dictionnaire"
+   },
+   "appShortName": {
+      "description": "The short-version name of the extension name",
+      "message": "Dictionnaire"
+   },
+   "define_cue": {
+      "description": "The search query cue for definition",
+      "message": "définir"
+   },
+   "synonyms_cue": {
+      "description": "The search query cue for synonyms",
+      "message": "synonymes"
+   }
+}

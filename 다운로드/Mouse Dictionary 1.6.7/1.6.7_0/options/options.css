@@ -1,0 +1,141 @@
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: "hiragino kaku gothic pro", meiryo, sans-serif;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+h3 {
+  margin-top: 40px;
+}
+
+#mainForm {
+  max-width: 60rem;
+}
+
+.swal-button {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.button-arrow {
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-right: 1px;
+}
+
+/* https://milligram.io/#buttons */
+
+/* Custom color */
+.button-black {
+  background-color: black;
+  border-color: black;
+}
+.button-black.button-clear,
+.button-black.button-outline {
+  background-color: transparent;
+  color: black;
+}
+.button-black.button-clear {
+  border-color: transparent;
+}
+
+/* Custom size */
+.button-small {
+  font-size: 1rem;
+  height: 2.8rem;
+  line-height: 2.8rem;
+  padding: 0 1.5rem;
+  margin: 1.5rm;
+}
+
+.button-large {
+  font-size: 1.2rem;
+  height: 4.5rem;
+  line-height: 4.5rem;
+  padding: 0 2rem;
+}
+
+hr {
+  margin: 0 0 0 0;
+}
+
+/* Syntax highlighting */
+/* https://github.com/satya164/react-simple-code-editor/blob/master/example/styles.css */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #90a4ae;
+}
+.token.punctuation {
+  color: #9e9e9e;
+}
+.namespace {
+  opacity: 0.7;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #e91e63;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #4caf50;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #795548;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #3f51b5;
+}
+.token.function {
+  color: #f44336;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #ff9800;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+
+/* For React Color */
+input:not([type]) {
+  padding: initial;
+}
+
+.hover_zoom {
+  transition: transform 0.25s;
+}
+
+.hover_zoom:hover {
+  transform: scale(1.1);
+}
