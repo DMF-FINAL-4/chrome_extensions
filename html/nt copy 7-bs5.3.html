@@ -42,16 +42,15 @@
         }
         .tab-footer {
             bottom: 0;
-            height: auto; /* 높이 자동 조절 */
-            padding-bottom: 5px; /* 하단 패딩 */
+            height: 56px;
         }
         /* 메인 콘텐츠 영역 */
         .tab-body {
             margin-top: 100px; /* 탭 네비게이션 + 헤더 높이 */
-            margin-bottom: calc(56px + var(--textarea-extra-height, 0px)); /* 풋터 높이 + 검색창 추가 높이 */
+            margin-bottom: 56px; /* 풋터 높이 */
             padding: 10px;
             overflow-y: auto;
-            height: calc(100vh - 156px - var(--textarea-extra-height, 0px)); /* 검색창 높이에 따라 조절 */
+            height: calc(100vh - 156px); /* 전체 높이에서 헤더, 풋터, 탭 네비게이션 높이 제외 */
         }
         /* 버튼 정렬 */
         .tab-header .btn-group-left {
@@ -70,8 +69,6 @@
         }
         .search-group .input-group {
             width: 100%;
-            display: flex;
-            align-items: flex-end;
         }
         .search-group textarea {
             width: 100%;
@@ -79,11 +76,6 @@
             overflow: hidden;
             min-height: 38px;
             max-height: 200px;
-            box-sizing: border-box;
-        }
-        .search-group .btn {
-            height: 38px;
-            margin-left: 5px;
         }
         /* 문서 스타일 */
         .document-item {
@@ -106,7 +98,6 @@
             width: 16px;
             height: 16px;
             margin-right: 5px;
-            flex-shrink: 0;
         }
         .document-title .title {
             font-weight: bold;
@@ -124,12 +115,10 @@
             text-overflow: ellipsis;
             max-width: 100px;
             margin-left: 5px;
-            flex-shrink: 0;
         }
         .document-actions {
             display: flex;
             align-items: center;
-            flex-shrink: 0;
         }
         .document-actions .action-btn {
             background: none;
@@ -158,17 +147,9 @@
             font-size: 0.9em;
             color: #555;
         }
-        .document-details .detail-line div {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
         .document-details .summary {
             margin-top: 5px;
             font-size: 0.9em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .document-details .keywords {
             margin-top: 5px;
@@ -178,9 +159,6 @@
         }
         .keyword-list {
             flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         .keyword-badge {
             display: inline-block;
@@ -316,10 +294,6 @@
     function autoResizeTextarea(textarea) {
         textarea.style.height = 'auto';
         textarea.style.height = (textarea.scrollHeight) + 'px';
-
-        // 추가된 높이를 계산하여 CSS 변수에 저장
-        const extraHeight = textarea.scrollHeight - 38; // 기본 높이 38px 제외
-        document.documentElement.style.setProperty('--textarea-extra-height', extraHeight + 'px');
     }
 
     // 검색 입력창 자동 높이 조절 이벤트 등록
@@ -342,9 +316,9 @@
                 url: '#',
                 save_time: '2023-01-01',
                 favicon_link: '', // 파비콘 링크 없을 시 디폴트 아이콘 사용
-                keyword_list: ['키워드1', '키워드2', '키워드3', '키워드4'],
+                keyword_list: ['키워드1', '키워드2'],
                 host_domain: 'example.com',
-                short_summary: '이것은 짧은 요약입니다. 이 문서는 예시를 위한 것입니다.',
+                short_summary: '이것은 짧은 요약입니다.',
                 author: '작성자 이름',
                 document_create_time: '2022-12-31'
             });
@@ -378,7 +352,6 @@
                     <div class="detail-line">
                         <div>
                             <span class="author-info" data-author="${data.author || ''}"></span>
-                            <span class="separator"> | </span>
                             <span class="created-time" data-time="${data.document_create_time || ''}"></span>
                         </div>
                         <span class="host-domain">${data.host_domain}</span>
@@ -533,28 +506,12 @@
         const isWide = window.innerWidth >= 600;
         document.querySelectorAll('.author-info').forEach(function(element) {
             const text = element.getAttribute('data-author');
-            element.textContent = text;
+            element.textContent = isWide && text ? '작성자: ' + text : text;
         });
         document.querySelectorAll('.created-time').forEach(function(element) {
             const text = element.getAttribute('data-time');
-            element.textContent = text;
+            element.textContent = isWide && text ? ' | 문서작성일: ' + text : text;
         });
-        // 라벨 처리
-        document.querySelectorAll('.separator').forEach(function(element) {
-            element.style.display = 'inline';
-        });
-        if (isWide) {
-            document.querySelectorAll('.author-info').forEach(function(element) {
-                if (element.textContent) {
-                    element.textContent = '작성자: ' + element.textContent;
-                }
-            });
-            document.querySelectorAll('.created-time').forEach(function(element) {
-                if (element.textContent) {
-                    element.textContent = '문서작성일: ' + element.textContent;
-                }
-            });
-        }
         // 버튼 텍스트 표시 업데이트
         document.querySelectorAll('.document-actions .action-btn .btn-text').forEach(function(element) {
             element.style.display = isWide ? 'inline' : 'none';
