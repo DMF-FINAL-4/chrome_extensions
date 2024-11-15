@@ -1,0 +1,73 @@
+<!-- side_panel/side_panel.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사이드 패널</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="side_panel.css">
+</head>
+<body>
+  <!-- 탭 영역 -->
+  <div class="tabs">
+    <div class="tab active" id="pages-tab">아카이브</div>
+    <div class="tab" id="history-tab">인포로그</div>
+  </div>
+
+  <!-- 아카이브 버튼 영역 -->
+  <div class="header d-flex justify-content-start align-items-center p-2 bg-light border-bottom">
+    <button class="btn btn-primary btn-sm me-2">페이지 저장</button>
+    <button class="btn btn-secondary btn-sm me-2">모든탭 저장</button>
+  </div>
+
+  <!-- 히스토리 자동저장 스위치 영역 -->
+  <div class="auto-save-switch d-flex justify-content-start align-items-center p-2 bg-light border-bottom" style="display: none;">
+    <div class="form-check form-switch ms-1">
+        <input class="form-check-input" type="checkbox" id="auto-save-switch">
+        <label class="form-check-label" for="auto-save-switch">히스토리 자동 저장</label>
+    </div>
+  </div>
+
+  <!-- 콘텐츠 영역 -->
+  <div class="content p-1">
+    <div class="list-group" id="list-container"></div>
+  </div>
+
+  <!-- AI 사서 스위치 영역 -->
+  <!-- <div class="footer ai-switch p-2 border-top">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="ai-switch">
+        <label class="form-check-label" for="ai-switch">AI 사서 검색</label>
+    </div>
+  </div> -->
+
+  <!-- 아카이브 검색 영역 -->
+  <div class="footer archive-search p-2 border-top">
+    <div class="form-check form-switch align-items-center">
+        <input class="form-check-input" type="checkbox" id="ai-switch">
+        <label class="form-check-label" for="ai-switch">AI 사서 검색</label>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="아카이브에서 검색">
+        <button class="btn btn-primary p-2" type="button">검색</button>
+    </div>
+  </div>
+
+
+  <!-- 인포로그 검색 영역 -->
+  <div class="footer history-search p-2 border-top" style="display: none;">
+    <div class="form-check form-switch align-items-center">
+        <input class="form-check-input" type="checkbox" id="ai-switch">
+        <label class="form-check-label" for="ai-switch">AI 사서 검색</label>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="인포로그에서 검색">
+        <button class="btn btn-primary p-2" type="button">검색</button>
+    </div>
+  </div>
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="side_panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Tab Interface</title>
+    <!-- 부트스트랩 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩 아이콘 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- 추가적인 스타일 -->
+    <style>
+        body {
+            min-width: 360px;
+            overflow-x: hidden;
+        }
+        /* 최상단 탭 네비게이션 */
+        .nav-tabs {
+            width: 100%;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-tabs .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tabs .nav-link {
+            width: 100%;
+        }
+        /* 헤더와 풋터 */
+        .tab-header, .tab-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            z-index: 1020;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+        }
+        .tab-header {
+            top: 50px; /* 탭 네비게이션 높이 */
+            height: 50px;
+        }
+        .tab-footer {
+            bottom: 0;
+            height: 56px;
+        }
+        /* 메인 콘텐츠 영역 */
+        .tab-body {
+            margin-top: 100px; /* 탭 네비게이션 + 헤더 높이 */
+            margin-bottom: 56px; /* 풋터 높이 */
+            padding: 10px;
+            overflow-y: auto;
+            height: calc(100vh - 156px); /* 전체 높이에서 헤더, 풋터, 탭 네비게이션 높이 제외 */
+        }
+        /* 버튼 정렬 */
+        .tab-header .btn-group-left {
+            margin-right: auto;
+        }
+        .tab-header .btn-group-right {
+            margin-left: auto;
+        }
+        /* 검색상자 반응형 조절 */
+        .search-group {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+        .search-group textarea {
+            width: 100%;
+            resize: none;
+            overflow: hidden;
+        }
+        /* 문서 스타일 */
+        .document-item {
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .document-item:hover {
+            background-color: #e2e2e2;
+        }
+        .document-item.expanded {
+            background-color: #e2e2e2;
+        }
+        .document-title {
+            display: flex;
+            align-items: center;
+        }
+        .document-title img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+        .document-title .title {
+            font-weight: bold;
+            margin-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+        .document-title .host-domain {
+            font-size: 0.9em;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+        }
+        .document-actions {
+            display: flex;
+            align-items: center;
+        }
+        .document-actions .action-btn {
+            background: none;
+            border: none;
+            margin-left: 5px;
+            color: #007bff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .document-actions .action-btn .btn-text {
+            display: none;
+        }
+        @media (min-width: 600px) {
+            .document-actions .action-btn .btn-text {
+                display: inline;
+                margin-left: 5px;
+            }
+        }
+        .document-details {
+            padding-top: 5px;
+        }
+        .document-details .detail-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .document-details .summary {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .document-details .keywords {
+            margin-top: 5px;
+        }
+        .keyword-badge {
+            display: inline-block;
+            padding: 2px 5px;
+            margin: 2px 2px 0 0;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+        /* 아이콘 */
+        .icon {
+            font-size: 1em;
+        }
+        /* 스위치 스타일 */
+        .form-switch .form-check-input {
+            width: 2em;
+            height: 1em;
+        }
+        /* 삭제 확인 버튼 스타일 */
+        .confirm-delete {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        /* 탭2 문서 스타일 */
+        #tab2-content .document-item {
+            background-color: transparent;
+            border-bottom: 1px solid #dee2e6;
+        }
+        #tab2-content .document-item:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 최상단 탭 네비게이션 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <ul class="nav nav-tabs w-100">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1-content">탭1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2-content">탭2</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="tab-content">
+    <!-- 탭1 내용 -->
+    <div class="tab-pane fade show active" id="tab1-content">
+        <!-- 탭1 헤더 -->
+        <div class="tab-header">
+            <div class="btn-group btn-group-left">
+                <button class="btn btn-primary">버튼1-1</button>
+                <button class="btn btn-primary">버튼1-2</button>
+            </div>
+            <div class="btn-group btn-group-right">
+                <button class="btn btn-primary">버튼1-3</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="tab-body" id="tab1-tab-body">
+            <div class="document-list" id="tab1-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab1-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="tab-footer">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="searchSwitch1">
+                <label class="form-check-label" for="searchSwitch1">검색스위치1 설명</label>
+            </div>
+            <div class="search-group">
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="검색상자1" rows="1"></textarea>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">검색버튼1</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 탭2 내용 -->
+    <div class="tab-pane fade" id="tab2-content">
+        <!-- 탭2 헤더 -->
+        <div class="tab-header">
+            <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="switch1">
+                <label class="form-check-label" for="switch1">스위치1 설명</label>
+            </div>
+            <div class="btn-group btn-group-right">
+                <button class="btn btn-primary">버튼2-1</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="tab-body" id="tab2-tab-body">
+            <div class="document-list" id="tab2-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab2-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="tab-footer">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="searchSwitch2">
+                <label class="form-check-label" for="searchSwitch2">검색스위치2 설명</label>
+            </div>
+            <div class="search-group">
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="검색상자2" rows="1"></textarea>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">검색버튼2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부트스트랩 JS 및 종속성 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- 스크립트 -->
+<script>
+    // 자동 높이 조절 함수
+    function autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = (textarea.scrollHeight) + 'px';
+    }
+
+    // 검색 입력창 자동 높이 조절 이벤트 등록
+    document.querySelectorAll('.search-group textarea').forEach(function(textarea) {
+        textarea.addEventListener('input', function() {
+            autoResizeTextarea(this);
+        });
+    });
+
+    // 탭1 문서 목록 로드 함수
+    let tab1Page = 1;
+    function loadTab1Documents() {
+        // fetch를 사용한 데이터 로드는 주석 처리하고, 예시 데이터를 생성합니다.
+        // fetch('your-api-endpoint-tab1?page=' + tab1Page)
+        //     .then(response => response.json())
+        //     .then(dataList => {
+        //         // 데이터 처리 로직
+        //     });
+
+        // 예시 데이터 생성
+        let dataList = [];
+        for (let i = 0; i < 50; i++) {
+            dataList.push({
+                title: '탭1 문서 제목 ' + ((tab1Page - 1) * 50 + i + 1),
+                url: '#',
+                save_time: '2023-01-01',
+                favicon_link: '', // 파비콘 링크 없을 시 디폴트 아이콘 사용
+                keyword_list: ['키워드1', '키워드2'],
+                host_domain: 'example.com',
+                short_summary: '이것은 짧은 요약입니다.',
+                author: '작성자 이름',
+                document_create_time: '2022-12-31'
+            });
+        }
+
+        let container = document.getElementById('tab1-document-list');
+        dataList.forEach(data => {
+            let docItem = document.createElement('div');
+            docItem.className = 'document-item';
+            docItem.innerHTML = `
+                <div class="document-title">
+                    <input type="checkbox" class="mr-2">
+                    <img src="${data.favicon_link || 'default-icon.png'}" alt="파비콘">
+                    <span class="title">${data.title}</span>
+                    <span class="host-domain">${data.host_domain}</span>
+                    <div class="document-actions ml-auto">
+                        <button class="action-btn view-details" title="상세">
+                            <i class="bi bi-eye icon"></i>
+                            <span class="btn-text">상세</span>
+                        </button>
+                        <button class="action-btn delete" title="삭제">
+                            <i class="bi bi-trash icon"></i>
+                            <span class="btn-text">삭제</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="document-details d-none">
+                    <div class="detail-line">
+                        <div>
+                            <span class="author-info">${data.author ? '작성자: ' + data.author : ''}</span>
+                            <span class="created-time">${data.document_create_time ? ' | 문서작성일: ' + data.document_create_time : ''}</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary hub-btn">허브</button>
+                    </div>
+                    <div class="summary">
+                        ${data.short_summary}
+                    </div>
+                    <div class="keywords">
+                        ${data.keyword_list.map(keyword => `<span class="keyword-badge">${keyword}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            // 이벤트 리스너 추가
+            docItem.querySelector('.document-title').addEventListener('click', function(e) {
+                // 기능 아이콘 클릭 시 이벤트 버블링 방지
+                if (e.target.closest('.document-actions') || e.target.closest('.action-btn') || e.target.tagName === 'INPUT') {
+                    return;
+                }
+                let details = docItem.querySelector('.document-details');
+                if (details.classList.contains('d-none')) {
+                    details.classList.remove('d-none');
+                    docItem.classList.add('expanded');
+                } else {
+                    details.classList.add('d-none');
+                    docItem.classList.remove('expanded');
+                }
+            });
+            // 삭제 버튼 이벤트
+            let deleteBtn = docItem.querySelector('.delete');
+            deleteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!docItem.querySelector('.confirm-delete')) {
+                    let confirmBtn = document.createElement('button');
+                    confirmBtn.className = 'btn btn-sm confirm-delete';
+                    confirmBtn.textContent = '삭제확인';
+                    deleteBtn.replaceWith(confirmBtn);
+                    // 실제 삭제 동작
+                    confirmBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // 삭제 로직 구현
+                        docItem.remove();
+                    });
+                    // 다른 곳 클릭 시 삭제확인 버튼 제거
+                    document.addEventListener('click', function removeConfirm(e) {
+                        if (!confirmBtn.contains(e.target)) {
+                            confirmBtn.replaceWith(deleteBtn);
+                            document.removeEventListener('click', removeConfirm);
+                        }
+                    });
+                }
+            });
+            container.appendChild(docItem);
+        });
+        tab1Page++;
+    }
+
+    // 탭2 문서 목록 로드 함수
+    let tab2Page = 1;
+    function loadTab2Documents() {
+        // fetch를 사용한 데이터 로드는 주석 처리하고, 예시 데이터를 생성합니다.
+        // fetch('your-api-endpoint-tab2?page=' + tab2Page)
+        //     .then(response => response.json())
+        //     .then(dataList => {
+        //         // 데이터 처리 로직
+        //     });
+
+        // 예시 데이터 생성
+        let dataList = [];
+        for (let i = 0; i < 50; i++) {
+            dataList.push({
+                title: '탭2 문서 제목 ' + ((tab2Page - 1) * 50 + i + 1),
+                url: '#',
+                favicon_link: '', // 파비콘 링크 없을 시 디폴트 아이콘 사용
+                host_domain: 'example.net'
+            });
+        }
+
+        let container = document.getElementById('tab2-document-list');
+        dataList.forEach(data => {
+            let docItem = document.createElement('div');
+            docItem.className = 'document-item';
+            docItem.innerHTML = `
+                <div class="document-title">
+                    <input type="checkbox" class="mr-2">
+                    <img src="${data.favicon_link || 'default-icon.png'}" alt="파비콘">
+                    <span class="title">${data.title}</span>
+                    <span class="host-domain">${data.host_domain}</span>
+                    <div class="document-actions ml-auto">
+                        <button class="action-btn delete" title="삭제">
+                            <i class="bi bi-trash icon"></i>
+                            <span class="btn-text">삭제</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+            // 삭제 버튼 이벤트는 탭1과 동일하게 적용
+            let deleteBtn = docItem.querySelector('.delete');
+            deleteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!docItem.querySelector('.confirm-delete')) {
+                    let confirmBtn = document.createElement('button');
+                    confirmBtn.className = 'btn btn-sm confirm-delete';
+                    confirmBtn.textContent = '삭제확인';
+                    deleteBtn.replaceWith(confirmBtn);
+                    // 실제 삭제 동작
+                    confirmBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        // 삭제 로직 구현
+                        docItem.remove();
+                    });
+                    // 다른 곳 클릭 시 삭제확인 버튼 제거
+                    document.addEventListener('click', function removeConfirm(e) {
+                        if (!confirmBtn.contains(e.target)) {
+                            confirmBtn.replaceWith(deleteBtn);
+                            document.removeEventListener('click', removeConfirm);
+                        }
+                    });
+                }
+            });
+            container.appendChild(docItem);
+        });
+        tab2Page++;
+    }
+
+    // 초기 로드
+    document.addEventListener('DOMContentLoaded', function() {
+        loadTab1Documents();
+    });
+
+    // 더보기 버튼 이벤트
+    document.getElementById('tab1-load-more').addEventListener('click', function() {
+        loadTab1Documents();
+    });
+    document.getElementById('tab2-load-more').addEventListener('click', function() {
+        loadTab2Documents();
+    });
+
+    // 탭 전환 시 문서 로드
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.id === 'tab2-tab' && tab2Page === 1) {
+            loadTab2Documents();
+        }
+    });
+
+    // 반응형 라벨 표시
+    function updateLabels() {
+        const isWide = window.innerWidth >= 600;
+        document.querySelectorAll('.author-info, .created-time').forEach(function(element) {
+            element.style.display = isWide ? 'inline' : 'none';
+        });
+        // 버튼 텍스트 표시 업데이트
+        document.querySelectorAll('.document-actions .action-btn .btn-text').forEach(function(element) {
+            element.style.display = isWide ? 'inline' : 'none';
+        });
+    }
+    window.addEventListener('resize', updateLabels);
+    updateLabels();
+
+</script>
+
+</body>
+</html>

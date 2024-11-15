@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Tab Interface</title>
+    <!-- 부트스트랩 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩 JS 및 종속성 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- 추가적인 스타일 -->
+    <style>
+        body {
+            padding-top: 56px;
+            padding-bottom: 56px;
+        }
+        .fixed-header, .fixed-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+        }
+        .fixed-header {
+            top: 0;
+        }
+        .fixed-footer {
+            bottom: 0;
+        }
+        .content {
+            margin-top: 120px;
+            margin-bottom: 80px;
+        }
+        .document-list {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .load-more {
+            text-align: center;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 최상단 탭 네비게이션 -->
+<nav class="fixed-header navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="nav nav-tabs" id="tabMenu">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1-content">탭1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2-content">탭2</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="tab-content">
+    <!-- 탭1 내용 -->
+    <div class="tab-pane fade show active" id="tab1-content">
+
+        <!-- 탭1 헤더 -->
+        <div class="fixed-header" style="top: 56px;">
+            <div class="bg-light py-2 px-3 d-flex justify-content-around">
+                <button class="btn btn-primary">버튼1-1</button>
+                <button class="btn btn-primary">버튼1-2</button>
+                <button class="btn btn-primary">버튼1-3</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="content container">
+            <div class="document-list" id="tab1-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab1-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="fixed-footer bg-light py-2 px-3 d-flex justify-content-between align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="searchSwitch1">
+                <label class="form-check-label" for="searchSwitch1">검색스위치1 설명</label>
+            </div>
+            <div class="input-group" style="max-width: 300px;">
+                <input type="text" class="form-control" placeholder="검색상자1">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">검색버튼1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 탭2 내용 -->
+    <div class="tab-pane fade" id="tab2-content">
+
+        <!-- 탭2 헤더 -->
+        <div class="fixed-header" style="top: 56px;">
+            <div class="bg-light py-2 px-3 d-flex justify-content-between align-items-center">
+                <div class="form-check mb-0">
+                    <input class="form-check-input" type="checkbox" id="switch1">
+                    <label class="form-check-label" for="switch1">스위치1 설명</label>
+                </div>
+                <button class="btn btn-primary">버튼2-1</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="content container">
+            <div class="document-list" id="tab2-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab2-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="fixed-footer bg-light py-2 px-3 d-flex justify-content-between align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="searchSwitch2">
+                <label class="form-check-label" for="searchSwitch2">검색스위치2 설명</label>
+            </div>
+            <div class="input-group" style="max-width: 300px;">
+                <input type="text" class="form-control" placeholder="검색상자2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">검색버튼2</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 스크립트 -->
+<script>
+    // 탭1 문서 목록 로드 함수
+    let tab1Page = 1;
+    function loadTab1Documents() {
+        // 여기에 서버로부터 데이터를 받아오는 AJAX 코드를 추가하세요
+        // 예시로 임의의 문서 항목을 생성합니다
+        let container = document.getElementById('tab1-document-list');
+        for (let i = 0; i < 50; i++) {
+            let docItem = document.createElement('div');
+            docItem.className = 'card mb-2';
+            docItem.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">탭1 문서 제목 ${(tab1Page - 1) * 50 + i + 1}</h5>
+                    <button class="btn btn-sm btn-info">기능 버튼</button>
+                </div>
+            `;
+            container.appendChild(docItem);
+        }
+        tab1Page++;
+    }
+
+    // 탭2 문서 목록 로드 함수
+    let tab2Page = 1;
+    function loadTab2Documents() {
+        // 여기에 서버로부터 데이터를 받아오는 AJAX 코드를 추가하세요
+        // 예시로 임의의 문서 항목을 생성합니다
+        let container = document.getElementById('tab2-document-list');
+        for (let i = 0; i < 50; i++) {
+            let docItem = document.createElement('div');
+            docItem.className = 'card mb-2';
+            docItem.innerHTML = `
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                        <img src="" alt="." class="favicon me-2">
+                        <span class="history-name">History Item 1</span>
+                    </div>
+                    <div>
+                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
+                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                // </div>
+                //     <div class="card-body">
+                //     <h5 class="card-title">탭2 문서 제목 ${(tab2Page - 1) * 50 + i + 1}</h5>
+                //     <button class="btn btn-sm btn-info">기능 버튼</button>
+                // </div>
+            `;
+            container.appendChild(docItem);
+        }
+        tab2Page++;
+    }
+
+    // 초기 로드
+    document.addEventListener('DOMContentLoaded', function() {
+        loadTab1Documents();
+    });
+
+    // 더보기 버튼 이벤트
+    document.getElementById('tab1-load-more').addEventListener('click', function() {
+        loadTab1Documents();
+    });
+    document.getElementById('tab2-load-more').addEventListener('click', function() {
+        loadTab2Documents();
+    });
+
+    // 탭 전환 시 문서 로드
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.id === 'tab2-tab' && tab2Page === 1) {
+            loadTab2Documents();
+        }
+    });
+</script>
+
+</body>
+</html>

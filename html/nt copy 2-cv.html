@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tabbed Interface with Bootstrap</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Fixed Header with Tabs -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tabbed Interface</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="tab1" onclick="showTab('tab1')">Tab 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="tab2" onclick="showTab('tab2')">Tab 2</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <!-- Tab 1 Content -->
+        <div id="tab1-content" class="tab-content">
+            <!-- Fixed Header Buttons -->
+            <div class="fixed-top mt-5 pt-4">
+                <div class="container">
+                    <div class="d-flex justify-content-between mb-3">
+                        <button class="btn btn-primary" id="button1-1">Button 1-1</button>
+                        <button class="btn btn-secondary" id="button1-2">Button 1-2</button>
+                        <button class="btn btn-success" id="button1-3">Button 1-3</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document List -->
+            <div class="document-list mt-5 pt-4" id="docListTab1">
+                <!-- JSON data will be loaded here dynamically -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-primary" id="loadMoreTab1">Load More</button>
+                </div>
+            </div>
+
+            <!-- Fixed Footer -->
+            <div class="fixed-bottom bg-light p-3">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="searchSwitch1">
+                        <label class="form-check-label" for="searchSwitch1">Search Switch 1</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="form-control mr-2" id="searchBox1" placeholder="Search...">
+                        <button class="btn btn-primary" id="searchButton1">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2 Content -->
+        <div id="tab2-content" class="tab-content d-none">
+            <!-- Fixed Header with Switch and Button -->
+            <div class="fixed-top mt-5 pt-4">
+                <div class="container">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="switch1">
+                            <label class="form-check-label" for="switch1">Switch 1</label>
+                        </div>
+                        <button class="btn btn-info" id="button2-1">Button 2-1</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document List -->
+            <div class="document-list mt-5 pt-4" id="docListTab2">
+                <!-- JSON data will be loaded here dynamically -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-outline-primary" id="loadMoreTab2">Load More</button>
+                </div>
+            </div>
+
+            <!-- Fixed Footer -->
+            <div class="fixed-bottom bg-light p-3">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="searchSwitch2">
+                        <label class="form-check-label" for="searchSwitch2">Search Switch 2</label>
+                    </div>
+                    <div class="form-inline">
+                        <input type="text" class="form-control mr-2" id="searchBox2" placeholder="Search...">
+                        <button class="btn btn-primary" id="searchButton2">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            // Hide all tab contents
+            document.getElementById('tab1-content').classList.add('d-none');
+            document.getElementById('tab2-content').classList.add('d-none');
+
+            // Show the selected tab content
+            document.getElementById(tab + '-content').classList.remove('d-none');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

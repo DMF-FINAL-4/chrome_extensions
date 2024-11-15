@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap Tab Interface</title>
+    <!-- 부트스트랩 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩 JS 및 종속성 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- 추가적인 스타일 -->
+    <style>
+        body {
+            min-width: 360px;
+            overflow-x: hidden;
+        }
+        /* 최상단 탭 네비게이션 */
+        .nav-tabs {
+            width: 100%;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .nav-tabs .nav-item {
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tabs .nav-link {
+            width: 100%;
+        }
+        /* 헤더와 풋터 */
+        .tab-header, .tab-footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background-color: #f8f9fa;
+            z-index: 1020;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+        }
+        .tab-header {
+            top: 50px; /* 탭 네비게이션 높이 */
+            height: 50px;
+        }
+        .tab-footer {
+            bottom: 0;
+            height: 56px;
+        }
+        /* 메인 콘텐츠 영역 */
+        .tab-body {
+            margin-top: 100px; /* 탭 네비게이션 + 헤더 높이 */
+            margin-bottom: 56px; /* 풋터 높이 */
+            padding: 10px;
+            overflow-y: auto;
+            height: calc(100vh - 156px); /* 전체 높이에서 헤더, 풋터, 탭 네비게이션 높이 제외 */
+        }
+        /* 버튼 정렬 */
+        .tab-header .btn-group-left {
+            margin-right: auto;
+        }
+        .tab-header .btn-group-right {
+            margin-left: auto;
+        }
+        /* 검색상자 반응형 조절 */
+        .search-group {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+        .search-group input {
+            width: 100%;
+        }
+        /* 문서 스타일 */
+        .document-item {
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .document-item:hover {
+            background-color: #e2e2e2;
+        }
+        .document-item.expanded {
+            background-color: #e2e2e2;
+        }
+        .document-title {
+            display: flex;
+            align-items: center;
+        }
+        .document-title img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+        .document-title .title {
+            font-weight: bold;
+            margin-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+        .document-title .host-domain {
+            font-size: 0.9em;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100px;
+        }
+        .document-actions {
+            display: flex;
+            align-items: center;
+        }
+        .document-actions button {
+            background: none;
+            border: none;
+            margin-left: 5px;
+            color: #007bff;
+            cursor: pointer;
+        }
+        .document-details {
+            padding-top: 5px;
+        }
+        .document-details .detail-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .document-details .summary {
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .document-details .keywords {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #007bff;
+        }
+        /* 아이콘 */
+        .icon {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 최상단 탭 네비게이션 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <ul class="nav nav-tabs w-100">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1-content">탭1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2-content">탭2</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="tab-content">
+    <!-- 탭1 내용 -->
+    <div class="tab-pane fade show active" id="tab1-content">
+        <!-- 탭1 헤더 -->
+        <div class="tab-header">
+            <div class="btn-group btn-group-left">
+                <button class="btn btn-primary">버튼1-1</button>
+                <button class="btn btn-primary">버튼1-2</button>
+            </div>
+            <div class="btn-group btn-group-right">
+                <button class="btn btn-primary">버튼1-3</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="tab-body" id="tab1-tab-body">
+            <div class="document-list" id="tab1-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab1-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="tab-footer">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="searchSwitch1">
+                <label class="form-check-label" for="searchSwitch1">검색스위치1 설명</label>
+            </div>
+            <div class="search-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="검색상자1">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">검색버튼1</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 탭2 내용 -->
+    <div class="tab-pane fade" id="tab2-content">
+        <!-- 탭2 헤더 -->
+        <div class="tab-header">
+            <div class="form-check mb-0">
+                <input class="form-check-input" type="checkbox" id="switch1">
+                <label class="form-check-label" for="switch1">스위치1 설명</label>
+            </div>
+            <div class="btn-group btn-group-right">
+                <button class="btn btn-primary">버튼2-1</button>
+            </div>
+        </div>
+
+        <!-- 문서 목록 -->
+        <div class="tab-body" id="tab2-tab-body">
+            <div class="document-list" id="tab2-document-list">
+                <!-- 문서 항목들이 여기 로드됩니다 -->
+            </div>
+            <div class="load-more" id="tab2-load-more">
+                <button class="btn btn-secondary">더보기</button>
+            </div>
+        </div>
+
+        <!-- 풋터 -->
+        <div class="tab-footer">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="searchSwitch2">
+                <label class="form-check-label" for="searchSwitch2">검색스위치2 설명</label>
+            </div>
+            <div class="search-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="검색상자2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">검색버튼2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 스크립트 -->
+<script>
+    // 탭1 문서 목록 로드 함수
+    let tab1Page = 1;
+    function loadTab1Documents() {
+        let container = document.getElementById('tab1-document-list');
+        for (let i = 0; i < 50; i++) {
+            // 예시 데이터 생성
+            let data = {
+                title: '탭1 문서 제목 ' + ((tab1Page - 1) * 50 + i + 1),
+                url: '#',
+                save_time: '2023-01-01',
+                favicon_link: '', // 파비콘 링크 없을 시 디폴트 아이콘 사용
+                keyword_list: ['키워드1', '키워드2'],
+                host_domain: 'example.com',
+                short_summary: '이것은 짧은 요약입니다.',
+                author: '작성자 이름'
+            };
+
+            let docItem = document.createElement('div');
+            docItem.className = 'document-item';
+            docItem.innerHTML = `
+                <div class="document-title">
+                    <input type="checkbox" class="mr-2">
+                    <img src="${data.favicon_link || 'default-icon.png'}" alt="파비콘">
+                    <span class="title">${data.title}</span>
+                    <span class="host-domain">${data.host_domain}</span>
+                    <div class="document-actions ml-auto">
+                        <button class="view-details" title="상세보기">
+                            <img src="view-icon.png" alt="상세보기" class="icon">
+                        </button>
+                        <button class="open-url" title="URL 열기">
+                            <img src="open-icon.png" alt="URL 열기" class="icon">
+                        </button>
+                        <button class="delete" title="삭제하기">
+                            <img src="delete-icon.png" alt="삭제하기" class="icon">
+                        </button>
+                    </div>
+                </div>
+                <div class="document-details d-none">
+                    <div class="detail-line">
+                        <div>
+                            ${data.author ? '작성자: ' + data.author : ''}
+                            ${data.save_time ? ' | 저장시간: ' + data.save_time : ''}
+                        </div>
+                        <button class="bank-btn" title="뱅크">
+                            <img src="bank-icon.png" alt="뱅크" class="icon">
+                        </button>
+                    </div>
+                    <div class="summary">
+                        ${data.short_summary}
+                    </div>
+                    <div class="keywords">
+                        ${data.keyword_list.join(', ')}
+                    </div>
+                </div>
+            `;
+            // 이벤트 리스너 추가
+            docItem.addEventListener('click', function(e) {
+                // 기능 아이콘 클릭 시 이벤트 버블링 방지
+                if (e.target.closest('.document-actions') || e.target.closest('.bank-btn') || e.target.tagName === 'INPUT') {
+                    return;
+                }
+                let details = this.querySelector('.document-details');
+                if (details.classList.contains('d-none')) {
+                    details.classList.remove('d-none');
+                    this.classList.add('expanded');
+                } else {
+                    details.classList.add('d-none');
+                    this.classList.remove('expanded');
+                }
+            });
+            container.appendChild(docItem);
+        }
+        tab1Page++;
+    }
+
+    // 탭2 문서 목록 로드 함수 (탭1과 동일한 구조로 구현 가능)
+    let tab2Page = 1;
+    function loadTab2Documents() {
+        // 여기에 탭2의 문서 로드 로직을 추가하세요
+    }
+
+    // 초기 로드
+    document.addEventListener('DOMContentLoaded', function() {
+        loadTab1Documents();
+    });
+
+    // 더보기 버튼 이벤트
+    document.getElementById('tab1-load-more').addEventListener('click', function() {
+        loadTab1Documents();
+    });
+    document.getElementById('tab2-load-more').addEventListener('click', function() {
+        loadTab2Documents();
+    });
+
+    // 탭 전환 시 문서 로드
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.id === 'tab2-tab' && tab2Page === 1) {
+            loadTab2Documents();
+        }
+    });
+</script>
+
+</body>
+</html>

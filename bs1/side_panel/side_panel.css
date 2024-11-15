@@ -1,0 +1,70 @@
+body {
+  width: 360px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  background-color: #ffffff;
+  color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.content {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: #007bff;
+}
+.icon-btn:hover {
+  color: #0056b3;
+}
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: background-color 0.3s;
+}
+.tab.active {
+  border-bottom: 2px solid #007bff;
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s;
+}
+.list-item:hover {
+  background-color: #e9ecef;
+}
+.footer {
+  transition: background-color 0.3s;
+}
+.archive-buttons, .auto-save-switch {
+  background-color: #f8f9fa;
+  padding: 10px;
+}

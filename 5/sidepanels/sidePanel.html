@@ -5,330 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootstrap Side Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            width: 360px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #ddd;
-        }
-        .content {
-            flex: 1;
-            overflow-y: auto;
-            font-size: 12px;
-        }
-        .form-check {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            font-size: 16px;
-            color: #007bff;
-        }
-        .icon-btn:hover {
-            color: #0056b3;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.nav-link');
-            const listContainer = document.getElementById('list-container');
-
-            const pagesContent = `
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="page-name">Page Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="page-name">Page Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="page-name">Page Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>`;
-
-            const historyContent = `
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="" alt="." class="favicon me-2">
-                        <span class="history-name">History Item 1</span>
-                    </div>
-                    <div>
-                        <button class="icon-btn" title="View"><i class="bi bi-eye"></i></button>
-                        <button class="icon-btn" title="URL"><i class="bi bi-link-45deg"></i></button>
-                        <button class="icon-btn" title="Delete"><i class="bi bi-trash"></i></button>
-                    </div>
-                </div>
-                `;
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-
-                    if (tab.id === 'pages-tab') {
-                        listContainer.innerHTML = pagesContent;
-                    } else if (tab.id === 'history-tab') {
-                        listContainer.innerHTML = historyContent;
-                    }
-                });
-            });
-
-            // 초기 로드
-            listContainer.innerHTML = pagesContent;
-        });
-    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 상단 버튼 영역 -->
-    <div class="d-flex justify-content-between align-items-center p-2 bg-light border-bottom">
+    <!-- 탭 영역 -->
+    <div class="tabs">
+        <div class="tab active" id="pages-tab" role="tab" aria-controls="list-container">아카이브</div>
+        <div class="tab" id="history-tab" role="tab" aria-controls="list-container">인포로그</div>
+    </div>
+
+    <!-- 아카이브 버튼 영역 -->
+    <div class="header d-flex justify-content-start align-items-center p-2 bg-light border-bottom archive-buttons">
         <button class="btn btn-primary btn-sm me-2">페이지 저장</button>
-        <button class="btn btn-primary btn-sm">모든탭 저장</button>
-        <div class="form-check form-switch d-flex align-items-center ms-2">
-            <label class="form-check-label small mb-0" for="auto-save-switch" style="line-height: 1;">히스토리 자동 저장</label>
-            <input class="form-check-input ms-2" type="checkbox" id="auto-save-switch">
+        <button class="btn btn-secondary btn-sm me-2">모든탭 저장</button>
+    </div>
+
+    <!-- 히스토리 자동저장 스위치 영역 -->
+    <div class="auto-save-switch d-flex justify-content-start align-items-center p-2 bg-light border-bottom" style="display: none;">
+        <div class="form-check form-switch ms-1">
+            <input class="form-check-input" type="checkbox" id="auto-save-switch">
+            <label class="form-check-label" for="auto-save-switch">히스토리 자동 저장</label>
         </div>
     </div>
-    
-    
-
-    <!-- 탭 영역 -->
-    <ul class="nav nav-tabs ">
-        <li class="nav-item">
-            <a class="nav-link active" href="#" id="pages-tab">Pages</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" id="history-tab">History</a>
-        </li>
-    </ul>
 
     <!-- 콘텐츠 영역 -->
     <div class="content p-1">
         <div class="list-group" id="list-container"></div>
     </div>
 
-    <!-- 하단 검색 및 스위치 영역 -->
-    <div class="p-2 border-top">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="이곳에 검색어 입력">
+    <!-- 아카이브 검색 영역 -->
+    <div class="footer archive-search p-2 border-top">
+        <div class="form-check form-switch align-items-center">
+            <input class="form-check-input" type="checkbox" id="ai-switch-archive">
+            <label class="form-check-label" for="ai-switch-archive">AI 사서 검색</label>
         </div>
-        <div class= 'd-flex justify-content-between'>
-            <div>
-                <div class="d-flex align-items-start ms-2">
-                    <p></p>pages</p>
-                    <div class="form-check form-switch ms-2">
-                        <input class="form-check-input" type="checkbox" name="search-type" id="index-radio">
-                        <label class="form-check-label" for="index-radio">history</label>
-                    </div>
-                </div>
-                <div class="d-flex align-items-start ms-2">
-                    <p>search</p>
-                    <div class="form-check form-switch ms-2">
-                        <input class="form-check-input" type="checkbox" id="ai-radio">
-                        <label class="form-check-label" for="ai-radio">AI chat</label>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <button class="btn btn-primary p-2" type="button">검색</button>
-            </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="아카이브에서 검색">
+            <button class="btn btn-primary p-2" type="button">검색</button>
         </div>
     </div>
+
+    <!-- 인포로그 검색 영역 -->
+    <div class="footer history-search p-2 border-top" style="display: none;">
+        <div class="form-check form-switch align-items-center">
+            <input class="form-check-input" type="checkbox" id="ai-switch-history">
+            <label class="form-check-label" for="ai-switch-history">AI 사서 검색</label>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="인포로그에서 검색">
+            <button class="btn btn-primary p-2" type="button">검색</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
