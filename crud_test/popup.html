@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Elasticsearch Create</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 10px;
+        }
+        label, input, textarea, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        #response {
+            background-color: #f0f0f0;
+            padding: 10px;
+            height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Create Document</h2>
+    
+    <!-- 데이터 입력 -->
+    <label for="documentData">문서 데이터 (JSON 형식):</label>
+    <textarea id="documentData" rows="5" placeholder='예: {"name": "Alice", "age": 30}'></textarea>
+    
+    <!-- Create 버튼 -->
+    <button id="createButton">Create</button>
+    
+    <!-- 응답 표시 -->
+    <h3>응답 결과:</h3>
+    <pre id="response"></pre>
+    
+    <!-- 팝업 스크립트 포함 -->
+    <script src="popup.js"></script>
+</body>
+</html>

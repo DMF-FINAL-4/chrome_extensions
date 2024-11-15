@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Page Info Sender",
+  "version": "1.0",
+  "description": "현재 페이지 정보를 Elasticsearch 서버로 전송합니다.",
+  "permissions": ["storage", "tabs", "scripting", "activeTab"],
+  "host_permissions": ["<all_urls>", "http://*/*", "https://*/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

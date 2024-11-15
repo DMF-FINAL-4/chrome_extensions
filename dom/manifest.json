@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "DOM Element Clipper",
+  "version": "1.0",
+  "description": "Select DOM elements and save text, images, and page info to IndexedDB.",
+  "permissions": ["storage", "scripting", "activeTab", "sidePanel"], // 저장소 접근, 스크립팅, 활성 탭 접근, 사이드 패널 권한 부여
+  "background": {
+    "service_worker": "background.js" // 백그라운드 스크립트 설정
+  },
+  "action": {
+    "default_icon": "icon.png", // 확장 프로그램 아이콘 파일 (icon.png 필요)
+    "default_title": "Click to open panel"
+  },
+  "commands": {
+    "toggle-selection-mode": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y" // 단축키 설정: Ctrl+Shift+Y로 요소 선택 모드 진입
+      },
+      "description": "Toggle element selection mode"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"], // 모든 URL에서 실행
+      "js": ["content.js"] // 콘텐츠 스크립트 설정
+    }
+  ],
+  "side_panel": {
+    "default_path": "panel.html", // 글로벌 사이드 패널 설정 (panel.html 필요)
+    "default_title": "Saved Clips" // 사이드 패널 제목 설정
+  }
+}

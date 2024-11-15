@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "DOM Element Selector",
+    "version": "1.0",
+    "description": "Select DOM elements and save their text to IndexedDB.",
+    "permissions": ["storage", "scripting", "activeTab"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_icon": "icon.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "commands": {
+      "toggle-selection-mode": {
+        "suggested_key": {
+          "default": "Ctrl+Shift+Y"
+        },
+        "description": "Toggle element selection mode"
+      }
+    }
+  }
+  

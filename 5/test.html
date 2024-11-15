@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Panel</title>
+    <style>
+        /* 기본 스타일 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            width: 300px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+        }
+
+        /* 상단 버튼 영역 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #0056b3;
+        }
+
+        .switch {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .switch input {
+            cursor: pointer;
+        }
+
+        /* 탭 및 리스트 영역 */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid #007bff;
+            font-weight: bold;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .list-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .list-item .buttons button {
+            margin-left: 5px;
+            padding: 5px;
+            font-size: 12px;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .list-item .buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 하단 검색 영역 */
+        .footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .footer .search-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 버튼 영역 -->
+    <div class="header">
+        <button>Page Save</button>
+        <button>All Tabs Save</button>
+        <div class="switch">
+            <label for="auto-save">Auto Save</label>
+            <input type="checkbox" id="auto-save">
+        </div>
+    </div>
+
+    <!-- 탭 영역 -->
+    <div class="tabs">
+        <div class="tab active" id="pages-tab">Pages</div>
+        <div class="tab" id="history-tab">History</div>
+    </div>
+
+    <!-- 리스트 출력 영역 -->
+    <div class="content">
+        <div class="list-item">
+            <span>Item 1</span>
+            <div class="buttons">
+                <button>View</button>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+        <div class="list-item">
+            <span>Item 2</span>
+            <div class="buttons">
+                <button>View</button>
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+        <!-- 추가 항목들 -->
+    </div>
+
+    <!-- 하단 검색 영역 -->
+    <div class="footer">
+        <input type="text" placeholder="Enter your search term here">
+        <div class="search-buttons">
+            <button>Pages Search</button>
+            <button>AI Search</button>
+        </div>
+    </div>
+</body>
+</html>

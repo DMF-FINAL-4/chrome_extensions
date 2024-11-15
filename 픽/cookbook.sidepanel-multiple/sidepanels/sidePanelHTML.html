@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My Sidepanel Extension</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      #extension-panel {
+        padding: 15px;
+      }
+      #save-current-page, #save-all-tabs, #search-button {
+        margin: 5px;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #save-current-page:hover, #save-all-tabs:hover, #search-button:hover {
+        background-color: #0056b3;
+      }
+      #status {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #ff0000;
+      }
+      #search-container {
+        margin-top: 20px;
+      }
+      #search-query {
+        width: calc(100% - 20px);
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      #search-type, #search-source {
+        margin-right: 10px;
+        padding: 8px;
+      }
+      #results-container {
+        margin-top: 20px;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+      }
+      .result-item {
+        padding: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+      }
+      .result-item:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="extension-panel">
+      <button id="save-current-page">현재 페이지 저장</button>
+      <button id="save-all-tabs">열려있는 모든 탭 저장</button>
+      <div id="status">상태 표시 영역</div>
+      <div id="search-container">
+        <input type="text" id="search-query" placeholder="검색어를 입력하세요" />
+        <select id="search-type">
+          <option value="text">텍스트 검색</option>
+          <option value="gpt">GPT 검색</option>
+        </select>
+        <select id="search-source">
+          <option value="pages">Pages 검색</option>
+          <option value="history">History 검색</option>
+        </select>
+        <button id="search-button">검색</button>
+      </div>
+      <div id="results-container"></div>
+    </div>
+    <script src="../content.js"></script>
+  </body>
+</html>
