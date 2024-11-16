@@ -36,15 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
         // 현재 활성 탭에 메시지 보내기
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             const activeTab = tabs[0];
-            chrome.tabs.sendMessage(activeTab.id, { action: 'getPageInfo' }, function(response) {
-                if (chrome.runtime.lastError) {
-                    console.error(chrome.runtime.lastError);
-                    alert('현재 페이지에서 정보를 가져올 수 없습니다.');
-                    return;
+
+            // content.js를 현재 탭에 명시적으로 로드
+            chrome.scripting.executeScript(
+                {
+                    target: { tabId: activeTab.id },
+                    files: ['content.js']
+                },
+                () => {
+                    if (chrome.runtime.lastError) {
+                        console.error(chrome.runtime.lastError);
+                        alert('현재 페이지에서 정보를 가져올 수 없습니다.');
+                        return;
+                    }
+                    
+                    // content.js가 로드된 후 현재 탭에 메시지를 보내 정보를 요청
+                    chrome.tabs.sendMessage(activeTab.id, { action: 'getPageInfo' }, function(response) {
+                        if (chrome.runtime.lastError) {
+                            console.error(chrome.runtime.lastError);
+                            alert('현재 페이지에서 정보를 가져올 수 없습니다.');
+                            return;
+                        }
+                        // 서버로 데이터 전송
+                        sendDataToServer(response);
+                    });
                 }
-                // 서버로 데이터 전송
-                sendDataToServer(response);
-            });
+            );
         });
     });
 });
@@ -105,13 +122,30 @@ function loadTab1Documents() {
             let host_domain = data.host_domain || '';
             let short_summary = data.short_summary || '';
             let author = data.author || '';
-            let document_create_time = data.date || '';
+            // 기존 코드에서 날짜 처리 부분 수정
+            let document_create_time = data.date;
+            if (document_create_time === '0001-01-01') {
+                document_create_time = '';
+            } else {
+                document_create_time = document_create_time || '';
+            }
             let data_id = data.id || '';
+            let created_at = data.created_at || '';
+
+            // 파비콘 이미지 요소 생성 시 이벤트 리스너 추가
+            // let faviconImg = document.createElement('img');
+            // faviconImg.src = favicon_link;
+            // faviconImg.alt = '파비콘';
+
+            // 이미지 로드 실패 시 대체 이미지로 변경
+            // faviconImg.onerror = function() {
+            //     this.src = 'default-icon.png';
+            // };
 
             docItem.innerHTML = `
                 <div class="document-title">
                     <input type="checkbox" class="form-check-input me-2">
-                    <img src="${favicon_link}" alt="파비콘">
+                    <img src="${favicon_link}" alt="파비콘" onerror="this.onerror=null; this.src='default-icon.png';">
                     <span class="title">${title}</span>
                     <div class="document-actions ms-auto">
                         <button class="action-btn view-details" title="상세">
