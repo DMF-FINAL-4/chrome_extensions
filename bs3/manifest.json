@@ -1,18 +1,30 @@
 {
   "manifest_version": 3,
-  "name": "My Side Panel Extension",
+  "name": "My Extension",
+  "description": "버튼 1-1 클릭 시 현재 페이지 저장",
   "version": "1.0",
-  "description": "크롬 브라우저 측면에 사이드 패널을 표시하는 확장 프로그램입니다.",
   "permissions": [
-    "sidePanel"
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "action": {
-    "default_title": "사이드 패널 열기"
-  },
-  "side_panel": {
-    "default_path": "side_panel/side_panel.html"
+    "default_title": "My Extension"
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "side_panel": {
+    "default_path": "side_panel/side_panel.html"
   }
 }
