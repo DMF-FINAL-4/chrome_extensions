@@ -1,9 +1,10 @@
-/* side_panel/side_panle.css */
+/* side_panel.css */
 
 body {
   min-width: 360px;
   overflow-x: hidden;
 }
+
 /* 최상단 탭 네비게이션 */
 .nav-tabs {
   width: 100%;
@@ -16,6 +17,7 @@ body {
 .nav-tabs .nav-link {
   width: 100%;
 }
+
 /* 헤더와 풋터 */
 .tab-header, .tab-footer {
   position: fixed;
@@ -23,28 +25,34 @@ body {
   right: 0;
   background-color: #f8f9fa;
   z-index: 1020;
-  display: flex;
   padding: 5px 10px;
 }
+
 .tab-header {
   top: 50px; /* 탭 네비게이션 높이 */
   height: 50px;
+  display: flex;
   align-items: center;
 }
+
 .tab-footer {
   bottom: 0;
-  height: auto; /* 높이 자동 조절 */
-  padding-bottom: 5px; /* 하단 패딩 */
-  align-items: flex-end;
+  display: flex;
+  flex-direction: column-reverse; /* 요소들을 아래에서 위로 쌓음 */
+  align-items: stretch;
+  padding: 10px;
+  box-sizing: border-box;
 }
+
 /* 메인 콘텐츠 영역 */
 .tab-body {
   margin-top: 100px; /* 탭 네비게이션 + 헤더 높이 */
-  margin-bottom: calc(56px + var(--textarea-extra-height, 0px)); /* 풋터 높이 + 검색창 추가 높이 */
+  margin-bottom: 120px; /* 풋터 높이 고려 (필요에 따라 조정) */
   padding: 10px;
   overflow-y: auto;
-  height: calc(100vh - 156px - var(--textarea-extra-height, 0px)); /* 검색창 높이에 따라 조절 */
+  height: calc(100vh - 220px); /* 전체 높이에서 헤더와 풋터 높이를 뺌 */
 }
+
 /* 버튼 정렬 */
 .tab-header .btn-group-left {
   margin-right: auto;
@@ -52,6 +60,7 @@ body {
 .tab-header .btn-group-right {
   margin-left: auto;
 }
+
 /* 검색그룹 스타일 */
 .search-group {
   flex-grow: 1;
@@ -61,14 +70,21 @@ body {
   align-items: flex-end;
 }
 
-/* 검색스위치 하단 정렬 */
-.tab-footer .form-check.form-switch {
-  align-self: flex-end;
+.tab-footer .search-group {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-/* 검색스위치와 검색상자 및 버튼의 여백 조정 */
+.tab-footer .search-group .input-group {
+  display: flex;
+  align-items: flex-end;
+}
+
 .tab-footer .form-check.form-switch {
-  margin-bottom: 5px;
+  align-self: flex-end; /* 검색스위치를 하단에 정렬 */
+  margin-bottom: 5px; /* 하단 여백 */
 }
 
 .search-group .input-group {
@@ -80,9 +96,9 @@ body {
 .search-group textarea {
   width: 100%;
   resize: none;
-  overflow: hidden;
+  overflow-y: hidden;
   min-height: 38px;
-  max-height: 600px;
+  max-height: 2000px; /* 이전에 2000px로 설정 */
   box-sizing: border-box;
 }
 
@@ -90,6 +106,7 @@ body {
   height: 38px;
   margin-left: 5px;
 }
+
 /* 문서 스타일 */
 .document-item {
   background-color: #f1f1f1;
@@ -219,7 +236,35 @@ body {
 #tab2-content .document-item:hover {
   background-color: #f8f9fa;
 }
-/* 검색스위치 하단 정렬 */
-.tab-footer .form-check.form-switch {
-  align-self: flex-end;
+
+/* 더보기 버튼 스타일 */
+.load-more {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    margin: 10px 0; /* 상하 여백 추가 */
+}
+
+.btn-load-more {
+    width: 300px; /* 버튼 너비 */
+    background-color: #f1f1f1; /* 버튼 배경색 */
+    border: none; /* 테두리 제거 */
+    padding: 10px 0; /* 위아래 패딩 */
+    font-size: 16px; /* 글꼴 크기 */
+    color: #333; /* 글자색 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px; /* 약간의 둥근 모서리 */
+    transition: background-color 0.3s ease; /* 부드러운 호버 효과 */
+}
+
+.btn-load-more i {
+    margin-right: 8px; /* 아이콘과 텍스트 사이 간격 */
+    font-size: 18px; /* 아이콘 크기 */
+}
+
+/* 버튼 호버 효과 */
+.btn-load-more:hover {
+    background-color: #e2e2e2; /* 호버 시 배경색 변경 */
 }

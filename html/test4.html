@@ -160,58 +160,50 @@
         <div class="tab" id="history-tab">인포로그</div>
     </div>
 
-
     <!-- 아카이브 버튼 영역 -->
-    <div class="archive-buttons d-flex justify-content-start align-items-center p-2 bg-light border-bottom" id="archive-buttons">
+    <div class="archive-buttons d-flex justify-content-start align-items-center p-2 bg-light border-bottom">
         <button class="btn btn-primary btn-sm me-2">페이지 저장</button>
         <button class="btn btn-secondary btn-sm me-2">모든탭 저장</button>
     </div>
 
     <!-- 히스토리 자동저장 스위치 영역 -->
-    <div class="auto-save-switch d-flex justify-content-start align-items-center p-2 bg-light border-bottom" id="auto-save-switch" style="display: none;">
+    <div class="auto-save-switch d-flex justify-content-start align-items-center p-2 bg-light border-bottom" style="display: none;">
         <div class="form-check form-switch ms-1">
             <input class="form-check-input" type="checkbox" id="auto-save-switch">
             <label class="form-check-label" for="auto-save-switch">히스토리 자동 저장</label>
         </div>
     </div>
 
-
-
-
     <!-- 콘텐츠 영역 -->
     <div class="content p-1">
         <div class="list-group" id="list-container"></div>
     </div>
 
-
-
-
-
     <!-- 아카이브 검색 영역 -->
-    <div class="footer archive-search border-top">
+    <div class="footer archive-search p-2 border-top">
         <div class="d-flex align-items-center">
-            <div class="form-check form-switch ms-2 mb-1">
+            <div class="form-check form-switch me-2">
                 <input class="form-check-input" type="checkbox" id="ai-switch">
-                <label class="form-check-label" for="ai-switch">AI 사서 채팅</label>
+                <label class="form-check-label" for="ai-switch">AI 사서 검색</label>
             </div>
-        </div>
-        <div class="input-group mb-2 mx-2">
-            <input type="text" class="form-control" placeholder="아카이브에서 검색">
-            <button class="btn btn-primary me-3" type="button">검색</button>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="아카이브에서 검색">
+                <button class="btn btn-primary p-2" type="button">검색</button>
+            </div>
         </div>
     </div>
 
     <!-- 인포로그 검색 영역 -->
     <div class="footer history-search p-2 border-top" style="display: none;">
         <div class="d-flex align-items-center">
-            <div class="form-check form-switch ms-2 mb-1">
+            <div class="form-check form-switch me-2">
                 <input class="form-check-input" type="checkbox" id="ai-switch">
-                <label class="form-check-label" for="ai-switch">AI 사서 채팅</label>
+                <label class="form-check-label" for="ai-switch">AI 사서 검색</label>
             </div>
-        </div>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="인포로그에서 검색">
-            <button class="btn btn-primary p-2" type="button">검색</button>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="인포로그에서 검색">
+                <button class="btn btn-primary p-2" type="button">검색</button>
+            </div>
         </div>
     </div>
 </body>

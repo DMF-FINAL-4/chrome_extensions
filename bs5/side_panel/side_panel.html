@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Side Panel</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="icons/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="side_panel.css">
+</head>
+<body>
+    <!-- 탭 네비게이션 -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1-content" type="button" role="tab" aria-controls="tab1-content" aria-selected="true">탭1</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2-content" type="button" role="tab" aria-controls="tab2-content" aria-selected="false">탭2</button>
+        </li>
+    </ul>
+
+    <!-- 탭 콘텐츠 -->
+    <div class="tab-content" id="myTabContent">
+        <!-- 탭1 콘텐츠 -->
+        <div class="tab-pane fade show active" id="tab1-content" role="tabpanel" aria-labelledby="tab1-tab">
+            <div id="tab1-document-list" class="tab-body">
+                <!-- 문서 목록이 여기에 표시됩니다 -->
+            </div>
+            <!-- 탭1 더 불러오기 버튼 -->
+            <div class="load-more" id="tab1-load-more">
+                <button class="btn btn-load-more">
+                    <i class="bi bi-chevron-down"></i>
+                    더 불러오기
+                </button>
+            </div>
+            <!-- 탭1 풋터 -->
+            <div class="tab-footer">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="searchSwitch1">
+                    <label class="form-check-label" for="searchSwitch1">검색스위치1 설명</label>
+                </div>
+                <div class="search-group">
+                    <div class="input-group">
+                        <textarea class="form-control" placeholder="검색상자1" rows="1"></textarea>
+                        <button class="btn btn-outline-secondary" type="button" id="searchButton1">검색버튼1</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 탭2 콘텐츠 -->
+        <div class="tab-pane fade" id="tab2-content" role="tabpanel" aria-labelledby="tab2-tab">
+            <div id="tab2-document-list" class="tab-body">
+                <!-- 문서 목록이 여기에 표시됩니다 -->
+            </div>
+            <!-- 탭2 더 불러오기 버튼 -->
+            <div class="load-more" id="tab2-load-more">
+                <button class="btn btn-load-more">
+                    <i class="bi bi-chevron-down"></i>
+                    더 불러오기
+                </button>
+            </div>
+            <!-- 탭2 풋터 -->
+            <div class="tab-footer">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="searchSwitch2">
+                    <label class="form-check-label" for="searchSwitch2">검색스위치2 설명</label>
+                </div>
+                <div class="search-group">
+                    <div class="input-group">
+                        <textarea class="form-control" placeholder="검색상자2" rows="1"></textarea>
+                        <button class="btn btn-outline-secondary" type="button" id="searchButton2">검색버튼2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달 창 -->
+    <div class="modal fade" id="documentDetailsModal" tabindex="-1" aria-labelledby="documentDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="documentDetailsModalLabel">문서 상세 정보</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+          </div>
+          <div class="modal-body">
+            <div id="document-details-content">
+              <!-- 데이터가 동적으로 추가됩니다 -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="side_panel.js"></script>
+</body>
+</html>

@@ -117,7 +117,7 @@ function loadTab1Documents() {
             // 키나 값이 없는 항목은 공란으로 처리
             let title = data.title || '';
             let url = data.alternate_url || '#';
-            let favicon_link = data.favicon || 'default-icon.png';
+            let favicon_link = data.favicon || 'default-icon.ico';
             let keyword_list = data.keywords || [];
             let host_domain = data.host_domain || '';
             let short_summary = data.short_summary || '';
