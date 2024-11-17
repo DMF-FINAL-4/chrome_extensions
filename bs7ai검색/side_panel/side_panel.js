@@ -25,18 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 입력 이벤트 리스너 등록
         textarea.addEventListener('input', function() {
             autoResizeTextarea(this);
-            
         });
-    });
-    // 검색 버튼 클릭 이벤트 리스너 추가
-    const searchButton1 = document.getElementById('searchButton1');
-    searchButton1.addEventListener('click', function() {
-        const queryText = document.querySelector('#tab1-content .search-group textarea').value.trim();
-        if (queryText) {
-            searchDocuments(queryText);
-        } else {
-            alert('검색어를 입력하세요.');
-        }
     });
 });
 
@@ -45,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -72,11 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         return;
                     }
                     
+                    // 탭1 문서 목록에 '새 페이지 분석중' 항목 추가
+                    addAnalyzingDocumentItem();
+                    
                     // content.js가 로드된 후 현재 탭에 메시지를 보내 정보를 요청
                     chrome.tabs.sendMessage(activeTab.id, { action: 'getPageInfo' }, function(response) {
                         if (chrome.runtime.lastError) {
                             console.error(chrome.runtime.lastError);
                             alert('현재 페이지에서 정보를 가져올 수 없습니다.');
+                            removeAnalyzingDocumentItem(); // 오류 발생 시 항목 제거
                             return;
                         }
                         // 서버로 데이터 전송
@@ -107,6 +99,7 @@ function sendDataToServer(data) {
   })
   .then(result => {
       alert('저장 성공!');
+      removeAnalyzingDocumentItem(); // 성공 시 항목 제거
       // 문서 목록 갱신
       tab1Page = 0;
       document.getElementById('tab1-document-list').innerHTML = '';
@@ -115,10 +108,31 @@ function sendDataToServer(data) {
   .catch(error => {
       console.error('Error saving document:', error);
       alert('저장 중 오류가 발생했습니다: ' + error.message);
+      removeAnalyzingDocumentItem(); // 오류 발생 시 항목 제거
   });
 }
 
+// 탭1 문서 목록에 '새 페이지 분석중' 항목 추가 함수
+function addAnalyzingDocumentItem() {
+    let container = document.getElementById('tab1-document-list');
+    let analyzingItem = document.createElement('div');
+    analyzingItem.className = 'document-item analyzing';
+    analyzingItem.id = 'analyzing-document-item';
+    analyzingItem.innerHTML = `
+        <div class="document-title">
+            <span class="title">새 페이지 분석중...</span>
+        </div>
+    `;
+    container.prepend(analyzingItem);
+}
 
+// '새 페이지 분석중' 항목 제거 함수
+function removeAnalyzingDocumentItem() {
+    let analyzingItem = document.getElementById('analyzing-document-item');
+    if (analyzingItem) {
+        analyzingItem.remove();
+    }
+}
 
 // 탭1 문서 목록 로드 함수
 let tab1Page = 0; // 페이지 번호는 0부터 시작
@@ -309,6 +323,7 @@ function isValidURL(url) {
         return false;
     }
 }
+
 
 // 상세보기 표시설정
 const keySettings = [
@@ -765,9 +780,7 @@ function isValidURL(string) {
 }
 
 
-
-
-// 검색 이벤트
+// 검색 이벤트 -분기 처리로 대체
 function searchDocuments(queryText) {
     fetch('http://localhost:8000/pages/text_search/', {
         method: 'POST',
@@ -810,7 +823,7 @@ function searchDocuments(queryText) {
     });
 }
 
-// 앤터 검색과 창비우기
+// 앤터 검색
 document.addEventListener('DOMContentLoaded', function () {
     const searchBox1 = document.querySelector('.search-group .form-control');
     const searchButton1 = document.getElementById('searchButton1');
@@ -832,8 +845,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function executeSearch() {
         const queryText = searchBox1.value.trim();
         if (queryText) {
-            searchDocuments(queryText);
-            searchBox1.value = ''; // 검색 후 검색창 비우기
+            const isAiSearch = document.getElementById('searchSwitch1').checked;
+            if (isAiSearch) {
+                // AI 검색 수행
+                aiSearchDocuments(queryText);
+            } else {
+                // 기존 검색 수행
+                searchDocuments(queryText);
+            }
+            // searchBox1.value = ''; // 검색 후 검색창 비우기
         }
     }
 });
@@ -968,12 +988,58 @@ function createDocumentItem(container, data) {
     });
 
     container.appendChild(docItem);
+
+    
 }
 
 
 
+// AI 검색 이벤트
+function aiSearchDocuments(queryText) {
+    fetch('http://localhost:8000/ai_search/gpt_search/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            query_text: queryText,
+            index: 'pages'
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errData => {
+                throw new Error(errData.error || 'Unknown error');
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        // 문서 목록 영역 초기화
+        let container = document.getElementById('tab1-document-list');
+        container.innerHTML = '';
 
+        // 검색 결과 표시 (AI 검색 응답)
+        const queryResults = data.results;
+        queryResults.forEach(data => {
+            createDocumentItem(container, data);
+        });
 
+        // 검색 결과에서는 더보기 버튼 숨기기
+        let loadMoreButton = document.getElementById('tab1-load-more');
+        loadMoreButton.style.display = 'none';
+
+        // 페이지 번호 초기화 (필요 시)
+        tab1Page = 0;
+
+        // 라벨 업데이트
+        updateLabels();
+    })
+    .catch(error => {
+        console.error('Error during AI search:', error);
+        alert('AI 검색 중 오류가 발생했습니다: ' + error.message);
+    });
+}
 
 
 
