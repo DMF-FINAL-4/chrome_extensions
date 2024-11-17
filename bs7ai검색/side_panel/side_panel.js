@@ -280,6 +280,10 @@ function loadTab1Documents() {
         });
         tab1Page++; // 다음 페이지를 위해 페이지 번호 증가
         updateLabels();
+
+        // 일반 문서 목록에서는 더보기 버튼 표시
+        let loadMoreButton = document.getElementById('tab1-load-more');
+        loadMoreButton.style.display = 'block';
     })
     .catch(error => {
         console.error('Error fetching documents:', error);
@@ -295,74 +299,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('tab1-load-more').addEventListener('click', function() {
     loadTab1Documents();
 });
-
-// 상세보기 버튼 이벤트
-// function showDocumentDetailsModal(docId) {
-//     fetch(`http://localhost:8000/pages/id/${docId}/`, {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             return response.json().then(errData => {
-//                 throw new Error(errData.error || 'Unknown error');
-//             });
-//         }
-//         return response.json();
-//     })
-//     .then(data => {
-//         // 모달 창에 데이터 표시
-//         const detailsContent = document.getElementById('document-details-content');
-//         detailsContent.innerHTML = ''; // 기존 내용 초기화
-
-//         // 데이터 객체의 키와 값을 순회하여 테이블로 표시
-//         const table = document.createElement('table');
-//         table.className = 'table table-bordered';
-
-//         for (const key in data) {
-//             if (data.hasOwnProperty(key)) {
-//                 const value = data[key];
-//                 const row = document.createElement('tr');
-
-//                 const keyCell = document.createElement('th');
-//                 keyCell.textContent = key;
-//                 keyCell.style.width = '30%';
-//                 keyCell.style.wordBreak = 'break-all';
-
-//                 const valueCell = document.createElement('td');
-//                 valueCell.style.wordBreak = 'break-all';
-//                 if (typeof value === 'object' && value !== null) {
-//                     valueCell.textContent = JSON.stringify(value, null, 2);
-//                 } else if (typeof value === 'string' && isValidURL(value)) {
-//                     const link = document.createElement('a');
-//                     link.href = value;
-//                     link.target = '_blank';
-//                     link.textContent = value;
-//                     valueCell.appendChild(link);
-//                 } else {
-//                     valueCell.textContent = value;
-//                 }
-
-//                 row.appendChild(keyCell);
-//                 row.appendChild(valueCell);
-//                 table.appendChild(row);
-//             }
-//         }
-
-//         detailsContent.appendChild(table);
-
-//         // 모달 창 표시
-//         let modal = new bootstrap.Modal(document.getElementById('documentDetailsModal'));
-//         modal.show();
-//     })
-//     .catch(error => {
-//         console.error('Error fetching document details:', error);
-//         alert('문서 상세 정보를 가져오는 중 오류가 발생했습니다: ' + error.message);
-//     });
-// }
-
 
 // 유효한 URL인지 확인하는 함수 (이미 정의되어 있다면 생략 가능)
 function isValidURL(url) {
@@ -647,6 +583,8 @@ const keySettings = [
 // }
 
 // 사용자 피드백을 위한 Toast 초기화
+
+
 const copyToastEl = document.getElementById('copyToast');
 const copyToast = new bootstrap.Toast(copyToastEl);
 
@@ -856,6 +794,10 @@ function searchDocuments(queryText) {
             createDocumentItem(container, data);
         });
 
+        // 검색 결과에서는 더보기 버튼 숨기기
+        let loadMoreButton = document.getElementById('tab1-load-more');
+        loadMoreButton.style.display = 'none';
+
         // 페이지 번호 초기화 (필요 시)
         tab1Page = 0;
 
@@ -868,6 +810,39 @@ function searchDocuments(queryText) {
     });
 }
 
+// 앤터 검색과 창비우기
+document.addEventListener('DOMContentLoaded', function () {
+    const searchBox1 = document.querySelector('.search-group .form-control');
+    const searchButton1 = document.getElementById('searchButton1');
+
+    // Enter 키 입력 시 검색 실행
+    searchBox1.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // 기본 동작 방지 (엔터로 줄바꿈되는 것을 막음)
+            executeSearch(); // 검색 실행 함수 호출
+        }
+    });
+
+    // 검색 버튼 클릭 시 검색 실행
+    searchButton1.addEventListener('click', function () {
+        executeSearch(); // 검색 실행 함수 호출
+    });
+
+    // 검색 실행 함수
+    function executeSearch() {
+        const queryText = searchBox1.value.trim();
+        if (queryText) {
+            searchDocuments(queryText);
+            searchBox1.value = ''; // 검색 후 검색창 비우기
+        }
+    }
+});
+
+
+
+
+
+
 // 검색 결과 목록 표시
 function createDocumentItem(container, data) {
     let docItem = document.createElement('div');
@@ -876,7 +851,7 @@ function createDocumentItem(container, data) {
     // 필요한 데이터 처리
     let title = data.title || '';
     let url = data.alternate_url || '#';
-    let favicon_link = data.favicon || 'default-icon.png';
+    let favicon_link = data.favicon || 'default-icon.ico';
     let keyword_list = data.keywords || [];
     let host_domain = data.host_domain || '';
     let short_summary = data.short_summary || '';
@@ -888,7 +863,7 @@ function createDocumentItem(container, data) {
     docItem.innerHTML = `
         <div class="document-title">
             <input type="checkbox" class="form-check-input me-2">
-            <img src="${favicon_link}" alt="파비콘" onerror="this.onerror=null; this.src='default-icon.png';">
+            <img src="${favicon_link}" alt="파비콘" onerror="this.onerror=null; this.src='default-icon.ico';">
             <span class="title">${title}</span>
             <div class="document-actions ms-auto">
                 <button class="action-btn view-details" title="상세">
@@ -994,6 +969,28 @@ function createDocumentItem(container, data) {
 
     container.appendChild(docItem);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
