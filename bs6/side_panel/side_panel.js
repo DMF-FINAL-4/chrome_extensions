@@ -268,6 +268,14 @@ function loadTab1Documents() {
                 e.stopPropagation();
                 window.open(url, '_blank');
             });
+
+            // 상세보기 버튼 이벤트
+            let viewDetailsBtn = docItem.querySelector('.view-details');
+            viewDetailsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showDocumentDetailsModal(data_id);
+            });
+
             container.appendChild(docItem);
         });
         tab1Page++; // 다음 페이지를 위해 페이지 번호 증가
@@ -289,8 +297,277 @@ document.getElementById('tab1-load-more').addEventListener('click', function() {
 });
 
 // 상세보기 버튼 이벤트
+// function showDocumentDetailsModal(docId) {
+//     fetch(`http://localhost:8000/pages/id/${docId}/`, {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             return response.json().then(errData => {
+//                 throw new Error(errData.error || 'Unknown error');
+//             });
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         // 모달 창에 데이터 표시
+//         const detailsContent = document.getElementById('document-details-content');
+//         detailsContent.innerHTML = ''; // 기존 내용 초기화
+
+//         // 데이터 객체의 키와 값을 순회하여 테이블로 표시
+//         const table = document.createElement('table');
+//         table.className = 'table table-bordered';
+
+//         for (const key in data) {
+//             if (data.hasOwnProperty(key)) {
+//                 const value = data[key];
+//                 const row = document.createElement('tr');
+
+//                 const keyCell = document.createElement('th');
+//                 keyCell.textContent = key;
+//                 keyCell.style.width = '30%';
+//                 keyCell.style.wordBreak = 'break-all';
+
+//                 const valueCell = document.createElement('td');
+//                 valueCell.style.wordBreak = 'break-all';
+//                 if (typeof value === 'object' && value !== null) {
+//                     valueCell.textContent = JSON.stringify(value, null, 2);
+//                 } else if (typeof value === 'string' && isValidURL(value)) {
+//                     const link = document.createElement('a');
+//                     link.href = value;
+//                     link.target = '_blank';
+//                     link.textContent = value;
+//                     valueCell.appendChild(link);
+//                 } else {
+//                     valueCell.textContent = value;
+//                 }
+
+//                 row.appendChild(keyCell);
+//                 row.appendChild(valueCell);
+//                 table.appendChild(row);
+//             }
+//         }
+
+//         detailsContent.appendChild(table);
+
+//         // 모달 창 표시
+//         let modal = new bootstrap.Modal(document.getElementById('documentDetailsModal'));
+//         modal.show();
+//     })
+//     .catch(error => {
+//         console.error('Error fetching document details:', error);
+//         alert('문서 상세 정보를 가져오는 중 오류가 발생했습니다: ' + error.message);
+//     });
+// }
+
+
+// 유효한 URL인지 확인하는 함수 (이미 정의되어 있다면 생략 가능)
+function isValidURL(url) {
+    try {
+        new URL(url);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+
+// 상세보기 표시설정
+const keySettings = [
+    {
+        key: "access_permission",
+        label: "접근 권한"
+    },
+    {
+        key: "favicon",
+        label: "파비콘",
+        formatter: value => {
+            const img = document.createElement('img');
+            img.src = value;
+            img.alt = "Favicon";
+            img.style.width = '32px';
+            img.style.height = '32px';
+            return img;
+        }
+    },
+    {
+        key: "host_domain",
+        label: "호스트 도메인"
+    },
+    {
+        key: "host_name",
+        label: "호스트 이름"
+    },
+    {
+        key: "alternate_url",
+        label: "대체 URL",
+        formatter: value => {
+            const link = document.createElement('a');
+            link.href = value;
+            link.target = '_blank';
+            link.textContent = value;
+            return link;
+        }
+    },
+    {
+        key: "title",
+        label: "제목"
+    },
+    {
+        key: "author",
+        label: "작성자"
+    },
+    {
+        key: "date",
+        label: "날짜",
+        formatter: value => {
+            const date = new Date(value);
+            return date.toLocaleDateString();
+        }
+    },
+    {
+        key: "content",
+        label: "내용",
+        formatter: value => {
+            const div = document.createElement('div');
+            div.textContent = value; // 텍스트 그대로 삽입
+            div.style.whiteSpace = 'pre-wrap'; // 줄바꿈 유지
+            return div;
+        }
+    },
+    {
+        key: "short_summary",
+        label: "짧은 요약"
+    },
+    {
+        key: "long_summary",
+        label: "긴 요약"
+    },
+    {
+        key: "keywords",
+        label: "키워드",
+        formatter: value => value.join(', ')
+    },
+    {
+        key: "category_keywords",
+        label: "카테고리 키워드",
+        formatter: value => value.join(', ')
+    },
+    {
+        key: "comments",
+        label: "댓글",
+        formatter: value => {
+            if (Array.isArray(value) && value.length > 0) {
+                const list = document.createElement('ul');
+                value.forEach(comment => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${comment.author} (${comment.date}): ${comment.content}`;
+                    list.appendChild(listItem);
+                });
+                return list;
+            }
+            return '댓글 없음';
+        }
+    },
+    {
+        key: "image_links",
+        label: "이미지 링크",
+        formatter: value => {
+            if (Array.isArray(value) && value.length > 0) {
+                const list = document.createElement('ul');
+                value.forEach(image => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = image.url;
+                    link.target = '_blank';
+                    link.textContent = image.caption;
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+                return list;
+            }
+            return '이미지 없음';
+        }
+    },
+    {
+        key: "links",
+        label: "링크",
+        formatter: value => {
+            if (Array.isArray(value) && value.length > 0) {
+                const list = document.createElement('ul');
+                value.forEach(linkItem => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = linkItem.url;
+                    link.target = '_blank';
+                    link.textContent = linkItem.caption;
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+                return list;
+            }
+            return '링크 없음';
+        }
+    },
+    {
+        key: "media",
+        label: "미디어",
+        formatter: value => {
+            if (Array.isArray(value) && value.length > 0) {
+                const list = document.createElement('ul');
+                value.forEach(mediaItem => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = mediaItem.url;
+                    link.target = '_blank';
+                    link.textContent = mediaItem.caption;
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+                return list;
+            }
+            return '미디어 없음';
+        }
+    },
+    {
+        key: "file_download_links",
+        label: "파일 다운로드 링크",
+        formatter: value => {
+            if (Array.isArray(value) && value.length > 0) {
+                const list = document.createElement('ul');
+                value.forEach(file => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = file.url;
+                    link.target = '_blank';
+                    link.textContent = `${file.caption} (${file.size})`;
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+                return list;
+            }
+            return '파일 없음';
+        }
+    },
+    {
+        key: "content_length",
+        label: "내용 길이"
+    },
+    {
+        key: "created_at",
+        label: "생성일",
+        formatter: value => {
+            const date = new Date(value);
+            return date.toLocaleString();
+        }
+    }
+];
+
+// 상세보기 버튼 이벤트 2
 function showDocumentDetailsModal(docId) {
-    fetch(`http://localhost:8000/pages/id/${docId}/`, {
+    fetch(`http://localhost:8000/pages/id/${docId}/`, { // 템플릿 리터럴 수정
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -309,39 +586,53 @@ function showDocumentDetailsModal(docId) {
         const detailsContent = document.getElementById('document-details-content');
         detailsContent.innerHTML = ''; // 기존 내용 초기화
 
-        // 데이터 객체의 키와 값을 순회하여 테이블로 표시
+        // 테이블 생성
         const table = document.createElement('table');
         table.className = 'table table-bordered';
 
-        for (const key in data) {
+        keySettings.forEach(setting => {
+            const { key, label, formatter } = setting;
             if (data.hasOwnProperty(key)) {
                 const value = data[key];
                 const row = document.createElement('tr');
 
                 const keyCell = document.createElement('th');
-                keyCell.textContent = key;
+                keyCell.textContent = label;
                 keyCell.style.width = '30%';
                 keyCell.style.wordBreak = 'break-all';
 
                 const valueCell = document.createElement('td');
                 valueCell.style.wordBreak = 'break-all';
-                if (typeof value === 'object' && value !== null) {
-                    valueCell.textContent = JSON.stringify(value, null, 2);
-                } else if (typeof value === 'string' && isValidURL(value)) {
-                    const link = document.createElement('a');
-                    link.href = value;
-                    link.target = '_blank';
-                    link.textContent = value;
-                    valueCell.appendChild(link);
+
+                if (formatter && typeof formatter === 'function') {
+                    const formattedValue = formatter(value);
+                    if (formattedValue instanceof HTMLElement) {
+                        valueCell.appendChild(formattedValue);
+                    } else {
+                        valueCell.innerHTML = formattedValue;
+                    }
                 } else {
-                    valueCell.textContent = value;
+                    // 기본 값 처리
+                    if (Array.isArray(value)) {
+                        valueCell.textContent = value.join(', ');
+                    } else if (typeof value === 'object' && value !== null) {
+                        valueCell.textContent = JSON.stringify(value, null, 2);
+                    } else if (typeof value === 'string' && isValidURL(value)) {
+                        const link = document.createElement('a');
+                        link.href = value;
+                        link.target = '_blank';
+                        link.textContent = value;
+                        valueCell.appendChild(link);
+                    } else {
+                        valueCell.textContent = value;
+                    }
                 }
 
                 row.appendChild(keyCell);
                 row.appendChild(valueCell);
                 table.appendChild(row);
             }
-        }
+        });
 
         detailsContent.appendChild(table);
 
@@ -354,6 +645,8 @@ function showDocumentDetailsModal(docId) {
         alert('문서 상세 정보를 가져오는 중 오류가 발생했습니다: ' + error.message);
     });
 }
+
+
 
 // URL 유효성 검사 함수
 function isValidURL(string) {
