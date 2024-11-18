@@ -1079,8 +1079,9 @@ function loadTab2Documents() {
             // 키나 값이 없는 항목은 공란 또는 기본값으로 처리
             let title = data.title || '제목 없음';
             let url = data.url || '#';
-            let favicon_link = data.favicon || 'default-icon.png';
+            let favicon_link = data.favicon || 'default-icon.ico';
             let created_at = data.created_at || '';
+            let content = data.content || '내용 없음';
 
             docItem.innerHTML = `
                 <div class="document-title">
@@ -1088,6 +1089,14 @@ function loadTab2Documents() {
                     <img src="${favicon_link}" alt="파비콘" onerror="this.onerror=null; this.src='default-icon.png';">
                     <span class="title">${title}</span>
                     <div class="document-actions ms-auto">
+                        <button class="action-btn view-details" title="상세">
+                            <i class="bi bi-eye icon"></i>
+                            <span class="btn-text">상세</span>
+                        </button>
+                        <button class="action-btn open-url" title="URL">
+                            <i class="bi bi-box-arrow-up-right icon"></i>
+                            <span class="btn-text">URL</span>
+                        </button>
                         <button class="action-btn delete" title="삭제">
                             <i class="bi bi-trash icon"></i>
                             <span class="btn-text">삭제</span>
@@ -1099,8 +1108,19 @@ function loadTab2Documents() {
                         <span class="created-time" data-time="${created_at}">작성일: ${created_at}</span>
                         <a href="${url}" target="_blank" class="document-url">${url}</a>
                     </div>
+                    <div class="content">
+                        ${content}
+                    </div>
                 </div>
             `;
+            
+            // favicon 이미지 오류 처리
+            const faviconImg = docItem.querySelector('.favicon-img');
+            if (faviconImg) {
+                faviconImg.addEventListener('error', function() {
+                    this.src = 'default-icon.ico';
+                });
+            }
 
             // 삭제 버튼 이벤트는 탭1과 동일하게 적용
             let deleteBtn = docItem.querySelector('.delete');
@@ -1138,6 +1158,21 @@ function loadTab2Documents() {
                     });
                 }
             });
+
+            // 상세보기 버튼 이벤트
+            let viewDetailsBtn = docItem.querySelector('.view-details');
+            viewDetailsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showDocumentDetailsModal(title, url, created_at, content);
+            });
+
+            // URL 버튼 이벤트
+            let openUrlBtn = docItem.querySelector('.open-url');
+            openUrlBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                window.open(url, '_blank');
+            });
+
             container.appendChild(docItem);
         });
         tab2Page++; // 다음 페이지를 위해 페이지 번호 증가
@@ -1146,6 +1181,21 @@ function loadTab2Documents() {
         console.error('Error fetching documents:', error);
     });
 }
+
+// 상세보기 모달 팝업 함수
+function showDocumentDetailsModal(title, url, created_at, content) {
+    const modalContent = document.getElementById('document-details-modal-content');
+    modalContent.innerHTML = `
+        <h5>문서 상세 정보</h5>
+        <p><strong>제목:</strong> ${title}</p>
+        <p><strong>URL:</strong> <a href="${url}" target="_blank">${url}</a></p>
+        <p><strong>작성일자:</strong> ${created_at}</p>
+        <p><strong>본문:</strong> ${content}</p>
+    `;
+    const modal = new bootstrap.Modal(document.getElementById('documentDetailsModal'));
+    modal.show();
+}
+
 
 // 초기 로드
 document.addEventListener('DOMContentLoaded', function() {
