@@ -1,0 +1,330 @@
+/* side_panel/side_panel.css */
+
+body {
+  min-width: 360px;
+  overflow-x: hidden;
+}
+
+.progress-bar{
+  background-color: #636363
+}
+
+/* 최상단 탭 네비게이션 */
+.nav-tabs {
+  width: 100%;
+  border-bottom: 1px solid #dee2e6;
+}
+.nav-tabs .nav-item {
+  flex: 1;
+  text-align: center;
+}
+.nav-tabs .nav-link {
+  width: 100%;
+}
+
+
+.nav-tabs .nav-link {
+  color: #00804d; /* 원하는 색상으로 변경하세요 */
+}
+
+/* 스위치 버튼 활성화 시 색상 */
+.form-switch .form-check-input:checked {
+  background-color: #00804d; /* 활성화 시 배경색 (갈색) */
+  border-color: #00804d;     /* 활성화 시 테두리 색상 (갈색) */
+}
+
+/* 글로벌 헤더 */
+.global-header {
+  position: fixed;
+  top: 50px; /* 탭 네비게이션 높이 */
+  left: 0;
+  right: 0;
+  height: 50px;
+  padding: 5px 10px;
+  z-index: 1020;
+}
+
+/* 풋터 */
+.tab-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f9fa;
+  z-index: 1020;
+  display: flex;
+  padding: 5px 10px;
+  height: auto; /* 높이 자동 조절 */
+  padding-bottom: 5px; /* 하단 패딩 */
+  align-items: flex-end;
+}
+
+/* 메인 콘텐츠 영역 */
+.tab-body {
+  margin-top: 100px; /* 탭 네비게이션 + 글로벌 헤더 높이 */
+  margin-bottom: calc(56px + var(--textarea-extra-height, 0px)); /* 풋터 높이 + 검색창 추가 높이 */
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100vh - 156px - var(--textarea-extra-height, 0px)); /* 검색창 높이에 따라 조절 */
+}
+
+/* 모달 창 크기 조정 */
+.modal-xl {
+  max-width: 90%;
+}
+
+/* 키 셀에서 줄바꿈 방지 */
+.modal-content th {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* 값 셀에서 줄바꿈 유지 */
+.modal-content td {
+  word-break: break-all;
+}
+
+/* 개별 항목 저장 버튼 스타일 */
+.modal-content .btn-copy {
+  font-size: 0.9em;
+  color: #6c757d;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 5px;
+}
+
+/* URL 값 작은 글씨 */
+.modal-content a {
+  font-size: 0.9em;
+}
+
+/* 문서 아이템 기본 펼침 */
+.document-item .document-details {
+  display: block;
+}
+
+/* 문서 스타일 */
+.document-item {
+  /* background-color: #f1f1f1; */ /* 배경색 제거 */
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  /* border: 1px solid #c19a6b; 옅은 갈색 테두리 */
+  /* border-radius: 5px; 모서리 둥글게 */
+}
+.document-item:hover {
+  /* background-color: #e2e2e2; */ /* 배경색 제거 */
+  border-color: #a0522d; /* 호버 시 테두리 색상 진한 갈색으로 변경 */
+}
+.document-item.expanded {
+  background-color: #f0f0f0; /* 배경색 제거 */
+  /* border-color: #a0522d; 펼쳐진 항목의 테두리 색상 진한 갈색으로 변경 */
+}
+
+/* 버튼 색상 변경 */
+.btn-brown {
+  /* background-color: #a0522d; 갈색 */
+  /* border-color: #a0522d; */
+  color: #000000;
+}
+
+/* 제목 스타일 */
+.document-title {
+  display: flex;
+  align-items: center;
+}
+.document-title img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.document-title .title {
+  font-weight: bold;
+  margin-right: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  font-size: 0.9em;
+}
+.document-title .host-domain {
+  font-size: 0.9em;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  margin-left: 5px;
+  flex-shrink: 0;
+}
+.document-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.document-actions .action-btn {
+  background: none;
+  border: none;
+  margin-left: 5px;
+  color: #00804d;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.document-actions .action-btn .btn-text {
+  display: none;
+}
+@media (min-width: 600px) {
+  .document-actions .action-btn .btn-text {
+      display: inline;
+      margin-left: 5px;
+  }
+}
+
+/* 상세 내용 */
+.document-details {
+  padding-top: 5px;
+}
+.document-details .detail-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  color: #555;
+}
+.document-details .detail-line div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.document-details .summary {
+  margin-top: 5px;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 요약 텍스트 스타일 */
+.summary-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.document-details .keywords {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.keyword-list {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.keyword-badge {
+  display: inline-block;
+  padding: 2px 5px;
+  margin: 2px 2px 0 0;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+/* 키워드 강조 스타일 */
+.keyword-badge.highlighted {
+  background-color: #00804d;
+  color: #fff;
+}
+
+/* 아이콘 */
+.icon {
+  font-size: 1em;
+}
+/* 스위치 스타일 */
+.form-switch .form-check-input {
+  width: 2em;
+  height: 1em;
+}
+/* 삭제 확인 버튼 스타일 */
+.confirm-delete {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+/* 탭2 문서 스타일 */
+#tab2-content .document-item {
+  background-color: transparent;
+  border-bottom: 1px solid #dee2e6;
+}
+#tab2-content .document-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* URL 값 작은 글씨 */
+.modal-content td a {
+  font-size: 0.85em;
+}
+
+/* 검색상자 스타일 */
+.search-group {
+  flex-grow: 1;
+  margin-left: 10px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.search-group .input-group {
+  width: 100%;
+}
+
+.search-group textarea {
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  max-height: 200px; /* 최대 높이 설정 */
+  min-height: 38px;
+  height: auto;
+}
+
+/* 허브 모달 스타일 */
+#hubModal .modal-dialog {
+  max-width: 100%;
+  margin: 0;
+}
+
+#hubModal .modal-content {
+  height: 100vh;
+}
+
+#hubModal .modal-body {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 56px); /* 모달 헤더 높이 조정 */
+}
+
+#hub-left-column, #hub-right-column {
+  overflow-y: auto;
+}
+
+#hub-left-column {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 15px;
+  border-right: 1px solid #dee2e6;
+}
+
+#hub-right-column {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 15px;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사이드 패널</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="side_panel.css">
+</head>
+<body>
+
+<!-- 최상단 탭 네비게이션 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <ul class="nav nav-tabs w-100">
+      <li class="nav-item">
+          <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1-content">탭1</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2-content">탭2</a>
+      </li>
+  </ul>
+</nav>
+
+<!-- 글로벌 헤더 -->
+<div class="global-header d-flex align-items-center bg-light">
+    <!-- 스위치1 -->
+    <div class="form-check form-switch mb-0 d-flex align-items-center">
+        <input class="form-check-input" type="checkbox" id="switch1">
+        <label class="form-check-label ms-2" for="switch1">스위치1 설명</label>
+    </div>
+    <!-- 버튼1-1 (스위치 오른쪽) -->
+    <div class="btn-group-left">
+        <button class="btn btn-primary ms-3">버튼1-1</button>
+    </div>
+</div>
+
+<div class="tab-content">
+  <!-- 탭1 내용 -->
+  <div class="tab-pane fade show active" id="tab1-content">
+
+      <!-- 문서 목록 -->
+      <div class="tab-body" id="tab1-tab-body">
+          <div class="document-list" id="tab1-document-list">
+              <!-- 문서 항목들이 여기 로드됩니다 -->
+          </div>
+          <div class="load-more" id="tab1-load-more">
+              <button class="btn btn-secondary">더보기</button>
+          </div>
+      </div>
+
+        <!-- 탭1 풋터 -->
+        <div class="tab-footer">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="searchSwitch1">
+                <label class="form-check-label" for="searchSwitch1">검색스위치1 설명</label>
+            </div>
+            <div class="search-group">
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="검색상자1" rows="1"></textarea>
+                    <button class="btn btn-outline-secondary" id="searchButton1" type="button">검색버튼1</button>
+                </div>
+            </div>
+        </div>
+
+  </div>
+
+  <!-- 탭2 내용 -->
+  <div class="tab-pane fade" id="tab2-content">
+
+      <!-- 문서 목록 -->
+      <div class="tab-body" id="tab2-tab-body">
+          <div class="document-list" id="tab2-document-list">
+              <!-- 문서 항목들이 여기 로드됩니다 -->
+          </div>
+          <div class="load-more" id="tab2-load-more">
+              <button class="btn btn-secondary">더보기</button>
+          </div>
+      </div>
+
+      <!-- 풋터 -->
+      <div class="tab-footer">
+          <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="searchSwitch2">
+              <label class="form-check-label" for="searchSwitch2">검색스위치2 설명</label>
+          </div>
+          <div class="search-group">
+              <div class="input-group">
+                  <textarea class="form-control" placeholder="검색상자2" rows="1"></textarea>
+                  <button class="btn btn-outline-secondary" id="searchButton2" type="button">검색버튼2</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- 모달 창 -->
+<div class="modal fade" id="documentDetailsModal" tabindex="-1" aria-labelledby="documentDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentDetailsModalLabel">문서 상세 정보</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body">
+                <!-- '전체 복사' 버튼 (상단) -->
+                <button id="copy-all-top" class="btn btn-secondary mb-3">
+                    <i class="bi bi-clipboard"></i> 전체 복사
+                </button>
+                
+                <div id="document-details-content">
+                    <!-- 데이터가 동적으로 추가됩니다 -->
+                </div>
+                
+                <!-- '전체 복사' 버튼 (하단) -->
+                <button id="copy-all-bottom" class="btn btn-secondary mt-3">
+                    <i class="bi bi-clipboard"></i> 전체 복사
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast (사용자 피드백) -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                클립보드에 복사되었습니다
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="닫기"></button>
+        </div>
+    </div>
+</div>
+
+  <!-- Bootstrap JS -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="side_panel.js"></script>
+</body>
+</html>

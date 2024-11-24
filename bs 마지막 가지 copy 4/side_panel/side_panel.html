@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사이드 패널</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="side_panel.css">
+</head>
+<body>
+    
+    <!-- 최상단 탭 네비게이션 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <ul class="nav nav-tabs w-100">
+          <li class="nav-item">
+              <a class="nav-link" id="tab2-tab" data-bs-toggle="tab" href="#tab2-content">웹메모리</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link active" id="tab1-tab" data-bs-toggle="tab" href="#tab1-content">아카이브</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab3-tab" data-bs-toggle="tab" href="#tab3-content">대시보드</a>
+          </li>
+      </ul>
+    </nav>
+    
+    <!-- 글로벌 헤더 -->
+    <div class="global-header d-flex align-items-center bg-light">
+        <!-- 왼쪽 섹션 -->
+        <div class="d-flex align-items-center">
+            <label class="form-check-label ms-2" for="switch1">웹메모리 사용</label>
+            <div class="form-check form-switch ms-2 d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" id="switch1">
+            </div>
+        </div>
+        <!-- 중앙 섹션 -->
+        <div class="flex-grow-1 text-center">
+            <button class="btn btn-primary">현재 페이지 저장</button>
+        </div>
+        <!-- 오른쪽 섹션 (필요 시 추가) -->
+        <div style="width: 100px;"></div>
+    </div>
+
+    <div class="tab-content">
+      <!-- 탭1 내용 -->
+      <div class="tab-pane fade show active" id="tab1-content">
+
+          <!-- 문서 목록 -->
+          <div class="tab-body" id="tab1-tab-body">
+              <div class="document-list" id="tab1-document-list">
+                  <!-- 문서 항목들이 여기 로드됩니다 -->
+              </div>
+              <div class="load-more" id="tab1-load-more">
+                  <button class="btn btn-outline-secondary">더 불러오기</button>
+              </div>
+          </div>
+
+          <!-- 탭1 풋터 -->
+          <div class="tab-footer">
+              <div class="form-check form-switch d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" id="searchSwitch1">
+                  <label class="form-check-label" for="searchSwitch1">AI 검색</label>
+              </div>
+              <div class="search-group">
+                  <div class="input-group">
+                      <textarea class="form-control" placeholder="아카이브에서 검색" rows="1"></textarea>
+                      <button class="btn btn-outline-secondary bi bi-search" id="searchButton1" type="button"></button>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <!-- 탭2 내용 -->
+      <div class="tab-pane fade" id="tab2-content">
+
+          <!-- 문서 목록 -->
+          <div class="tab-body" id="tab2-tab-body">
+              <div class="document-list" id="tab2-document-list">
+                  <!-- 문서 항목들이 여기 로드됩니다 -->
+              </div>
+              <div class="load-more" id="tab2-load-more">
+                  <button class="btn btn-outline-secondary">더 불러오기</button>
+              </div>
+          </div>
+
+          <!-- 풋터 -->
+          <div class="tab-footer">
+              <div class="form-check form-switch d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" id="searchSwitch2">
+                  <label class="form-check-label" for="searchSwitch2">AI 검색</label>
+              </div>
+              <div class="search-group">
+                  <div class="input-group">
+                      <textarea class="form-control" placeholder="웹메모리에서 검색" rows="1"></textarea>
+                      <button class="btn btn-outline-secondary bi bi-search" id="searchButton2" type="button"></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- 탭3 내용 -->
+      <div class="tab-pane fade" id="tab3-content">
+          <!-- 요소1: 날짜 선택 드롭다운 메뉴 (테두리 없음) -->
+          
+          <!-- 요소2: 폴더 목록 -->
+          <div class="card my-3">
+<h1> .</h1>
+<h1> .</h1>
+
+                <div class="card-header">
+                    폴더
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">개발자의 삶 (5)</li>
+                        <li class="list-group-item">미국대선 이슈 (7)</li>
+                        <li class="list-group-item">나의 요리 레시피 (2)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="date-selection d-flex justify-content-start my-2">
+                <select class="form-select w-auto">
+                    <option>오늘</option>
+                    <option>이번주</option>
+                    <option>이번달</option>
+                    <option>날짜지정</option>
+                </select>
+            </div>
+          <!-- 요소3: 키워드 순위 -->
+          <div class="card my-3">
+              <div class="card-header">
+                  아카이브 된 문서내 키워드 순위
+              </div>
+              <div class="card-body">
+                  <div class="mb-2">
+                      <span>트럼프</span>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 70%;">41</div>
+                      </div>
+                  </div>
+                  <div class="mb-2">
+                      <span>미국 대선</span>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 50%;">26</div>
+                      </div>
+                  </div>
+                  <div class="mb-2">
+                    <span>부트스트랩</span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 43%;">22</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <span>건강</span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 14%;">6</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <span>손흥민</span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 7%;">3</div>
+                    </div>
+                </div>
+                  <!-- 추가 키워드 예시 -->
+              </div>
+          </div>
+
+          <!-- 요소4: 도메인 순위 -->
+          <div class="card my-3">
+              <div class="card-header">
+                  방문한 도메인 순위
+              </div>
+              <div class="card-body">
+                  <div class="mb-2">
+                      <span>동아일보</span>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 80%; ">81</div>
+                      </div>
+                  </div>
+                  <div class="mb-2">
+                      <span>어린이 동아</span>
+                      <div class="progress">
+                          <div class="progress-bar" role="progressbar" style="width: 60%;">59</div>
+                      </div>
+                  </div>
+                  <div class="mb-2">
+                    <span>github</span>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 44%;">44</div>
+                    </div>
+                </div>
+                  <!-- 추가 도메인 예시 -->
+              </div>
+          </div>
+
+          <!-- 요소5: 설정 및 테마 선택 -->
+          <div class="card my-3">
+              <div class="card-header">
+                  설정 및 테마 선택
+              </div>
+              <div class="card-body">
+                  <!-- 설정 내용 -->
+                  <button class="btn btn-secondary">설정</button>
+                  <button class="btn btn-secondary">테마 선택</button>
+              </div>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- 모달 창 및 기타 요소들은 기존 코드 그대로 유지 -->
+<!-- 모달 창 -->
+<div class="modal fade" id="documentDetailsModal" tabindex="-1" aria-labelledby="documentDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl"> <!-- modal-lg를 modal-xl로 변경 -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentDetailsModalLabel">문서 상세 정보</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body">
+                <!-- '전체 복사' 버튼 (상단) -->
+                <button id="copy-all-top" class="btn btn-secondary mb-3">
+                    <i class="bi bi-clipboard"></i> 전체 복사
+                </button>
+                
+                <div id="document-details-content">
+                    <!-- 데이터가 동적으로 추가됩니다 -->
+                </div>
+                
+                <!-- '전체 복사' 버튼 (하단) -->
+                <button id="copy-all-bottom" class="btn btn-secondary mt-3">
+                    <i class="bi bi-clipboard"></i> 전체 복사
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 허브 모달 창 -->
+<div class="modal fade" id="hubModal" tabindex="-1" aria-labelledby="hubModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen"> <!-- 전체 화면 모달 -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">유사 문서</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row h-100">
+                    <!-- 좌측 열 -->
+                    <div class="col-md-4 d-flex flex-column" id="hub-left-column">
+                        <!-- 선택한 문서 정보 -->
+                        <div id="hub-selected-document">
+                            <!-- 선택한 문서 정보가 여기에 표시됩니다 -->
+                        </div>
+                        <!-- 탭2의 관련 문서 -->
+                        <h5>탭2의 관련 문서</h5>
+                        <div id="hub-tab2-related-documents" class="flex-grow-1 overflow-auto">
+                            <!-- 탭2 검색 결과가 여기에 표시됩니다 -->
+                        </div>
+                    </div>
+                    <!-- 우측 열 -->
+                    <div class="col-md-8 d-flex flex-column" id="hub-right-column">
+                        <h5>탭1 관련 문서</h5>
+                        <div id="hub-tab1-related-documents" class="flex-grow-1 overflow-auto">
+                            <!-- 탭1 검색 결과가 여기에 표시됩니다 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast (사용자 피드백) -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                클립보드에 복사되었습니다
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="닫기"></button>
+        </div>
+    </div>
+</div>
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="side_panel.js"></script>
+</body>
+</html>

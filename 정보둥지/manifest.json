@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "정보 둥지 InfoNest",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_title": "정보 둥지 InfoNest"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "side_panel": {
+    "default_path": "side_panel/side_panel.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/fonts/*",
+        "icons/bootstrap-icons.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:8000 https://localhost:8000"
+  },
+  "icons": {
+    "128": "128.png"
+  }
+}
